@@ -1,36 +1,31 @@
 package dirchooser;
 
-import java.awt.Color;
-import java.awt.ComponentOrientation;
-import java.awt.FlowLayout;
-import java.awt.TextField;
+import java.awt.GridBagConstraints;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
-import java.io.IOException;
 
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
-
-import org.ini4j.Ini;
-import org.ini4j.InvalidFileFormatException;
 
 import imagerenamer.ImageRenamer;
 
 public final class DirChooser extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
+		
+	private RPanel panel;
+		
+	private RLabel srcLabel;
+	private RLabel destLabel;
 	
-	private Ini confFile;
+	private RTextField srcTextField;
+	private RTextField destTextField;
 	
-	private JButton srcButton;
-	private JButton destButton;
-	private JButton runButton;
-	
-	private TextField srcTextField;
-	private TextField destTextField;
+	private RButton srcButton;
+	private RButton destButton;
+	private RButton runButton;
 	
 	private ImageRenamer renamer;
 	
@@ -65,61 +60,85 @@ public final class DirChooser extends JFrame implements ActionListener {
 	}
 	
 	private void initComponents () {
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new FlowLayout());
-		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		initPanel();
+		initFrame();
+		initLabels();
+	  	initTextFields();
+	  	initButtons();
 		
-		try {
-			confFile = new Ini(new File("src\\main\\resources\\conf.ini"));
-		} catch (InvalidFileFormatException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		GridBagConstraints  contrains = new GridBagConstraints();
+		contrains.insets = new Insets(10, 10, 10, 10);
+		contrains.gridx = 0;
+		contrains.gridy = 0;
+		panel.add(srcLabel, contrains);
+		contrains.gridx = 1;
+		contrains.gridy = 0;
+		panel.add(srcTextField, contrains);
+		contrains.gridx = 2;
+		contrains.gridy = 0;
+		panel.add(srcButton, contrains);
+		contrains.gridx = 0;
+		contrains.gridy = 1;
+		panel.add(destLabel, contrains);
+		contrains.gridx = 1;
+		contrains.gridy = 1;
+		panel.add(destTextField, contrains);
+		contrains.gridx = 2;
+		contrains.gridy = 1;
+		panel.add(destButton, contrains);
+		contrains.gridx = 1;
+		contrains.gridy = 3;
+		contrains.fill = GridBagConstraints.HORIZONTAL;
+		panel.add(runButton, contrains);
 		
-		this.setTitle(getWindowConfig("Title"));
+		this.pack();
 		this.setVisible(true);
-		this.setIconImage(new ImageIcon(getWindowConfig("IconPath")).getImage());
-		this.getContentPane().setBackground(decodeColor(getWindowConfig("BackgroundColor")));
-		this.setSize(Integer.parseInt(getWindowConfig("Width")), Integer.parseInt(getWindowConfig("Height")));
+	}
+	
+	private void initPanel() {
+		panel = RPanel.create();
+		panel.configure();
+	}
+	
+	private void initFrame() {
+		RIni ini = RIni.create();
 		
-		srcButton = new JButton(getButtonsConfig("SrcChooserText"));
-		srcButton.setForeground(decodeColor(getButtonsConfig("TextColor")));
-		srcButton.setBackground(decodeColor(getButtonsConfig("BackgroundColor")));
+		add(panel);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle(ini.readFrom("Frame", "Title"));
+		setIconImage(new ImageIcon(ini.readFrom("Frame", "IconPath")).getImage());
+		setSize(Integer.parseInt(ini.readFrom("Frame", "Width")), 
+				Integer.parseInt(ini.readFrom("Frame", "Height")));
+	}
+	
+	private void initLabels() {
+		srcLabel = RLabel.withText("Source folder:");
+		srcLabel.configure();
+		
+		destLabel = RLabel.withText("Destination folder:");
+		destLabel.configure();
+	}
+	
+	private void initTextFields() {
+		srcTextField = RTextField.create();
+	  	srcTextField.configure();
+	  	
+	  	destTextField = RTextField.create();
+	  	destTextField.configure();
+	}
+	
+	private void initButtons() {
+		srcButton = RButton.withText("Browse");
+		srcButton.configure();
 		srcButton.addActionListener(this);
-		this.add(srcButton);
-		
-		destButton = new JButton(getButtonsConfig("DestChooserText"));
-		destButton.setForeground(decodeColor(getButtonsConfig("TextColor")));
-		destButton.setBackground(decodeColor(getButtonsConfig("BackgroundColor")));
+	
+		destButton = RButton.withText("Browse");
+		destButton.configure();
 		destButton.addActionListener(this);
-		this.add(destButton);
 		
-		srcTextField = new TextField();
-		this.add(srcTextField);
-		
-		destTextField = new TextField();
-		this.add(destTextField);
-		
-		runButton = new JButton("Run");
-		runButton.setForeground(decodeColor(getButtonsConfig("TextColor")));
-		runButton.setBackground(decodeColor(getButtonsConfig("BackgroundColor")));
+		runButton = RButton.withText("Run");
+		runButton.configure();
 		runButton.addActionListener(this);
-		this.add(runButton);
-		
-		this.validate();
-	}
-	
-	private String getWindowConfig(String field) {
-		return confFile.get("Window", field);
-	}
-	
-	private String getButtonsConfig(String field) {
-		return confFile.get("Buttons", field);
-	}
-	
-	private Color decodeColor(String hexColor) {
-		return Color.decode(hexColor);
 	}
 		
 }
