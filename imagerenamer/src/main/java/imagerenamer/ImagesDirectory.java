@@ -1,4 +1,4 @@
-package imagerenamer;
+package imageorganizer;
 
 import java.io.File;
 import java.util.Arrays;
@@ -7,21 +7,21 @@ import java.util.stream.Collectors;
 
 final class ImagesDirectory {
 
-	private final File source;
+	private final File file;
 	
 	static ImagesDirectory fromPath(String path) {
 		return new ImagesDirectory(path);
 	}
 	
 	List<Image> listImages() {
-		return Arrays.asList(source.listFiles())
+		return Arrays.asList(file.listFiles())
 					 .parallelStream()
 					 .map(Image::new)
 					 .collect(Collectors.toList());
 	}
 	
 	private ImagesDirectory(String path) {
-		this.source = new File(path);
+		this.file = new File(path);
 	}
 	
 }
