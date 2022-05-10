@@ -10,7 +10,7 @@ import java.nio.file.attribute.BasicFileAttributes;
  * relative to it's date of last modification.
  *  
  * @version 
- * 1.0.0
+ * 0.1.0
  * @author 
  * raflat
  */
@@ -89,7 +89,7 @@ final class Image {
 		return name.substring(name.indexOf("."));
 	}
 
-	private final String extractDate() throws IOException {
+	private String extractDate() throws IOException {
 		if (!file.isFile())
 			throw new IOException("Ensure that a file was given " + "and not a directory.");
 		
