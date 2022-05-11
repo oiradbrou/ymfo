@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
  * the images that the user wants to organise are taken.
  * 
  * @author 
- * Dario
+ * raflat
  */
 final class ImagesDirectory {
 
