@@ -1,4 +1,4 @@
-package imageorganizer;
+package organizer;
 
 import java.util.LinkedList;
 

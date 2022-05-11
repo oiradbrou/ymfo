@@ -1,4 +1,4 @@
-package imageorganizer;
+package organizer;
 
 import java.io.File;
 import java.util.Arrays;

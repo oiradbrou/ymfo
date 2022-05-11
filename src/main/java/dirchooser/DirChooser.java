@@ -10,7 +10,7 @@ import java.awt.image.BufferedImage;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-import imageorganizer.Organizer;
+import organizer.Organizer;
 
 public final class DirChooser extends JFrame implements ActionListener {
 

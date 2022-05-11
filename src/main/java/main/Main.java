@@ -1,6 +1,6 @@
 package main;
 
-import imageorganizer.Organizer;
+import organizer.Organizer;
 
 public class Main {
 
