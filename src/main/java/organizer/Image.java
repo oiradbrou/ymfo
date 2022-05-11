@@ -9,8 +9,6 @@ import java.nio.file.attribute.BasicFileAttributes;
  * Class that wraps a File type and provides methods to extract informations
  * relative to it's date of last modification.
  *  
- * @version 
- * 0.1.0
  * @author 
  * raflat
  */
