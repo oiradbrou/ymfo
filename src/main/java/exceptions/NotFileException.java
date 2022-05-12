@@ -4,7 +4,7 @@ import java.io.IOException;
 
 /**
  * {@link IOException} that is thrown when the resource provided
- * isn't a file, but a directory.
+ * to a method is supposed to be a file, but actually is a directory.
  * 
  * @author raflat
  */

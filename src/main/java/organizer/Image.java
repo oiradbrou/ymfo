@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 
+import exceptions.NotFileException;
+
 /**
  * Class that wraps a File type and provides methods to extract informations
  * relative to it's date of last modification.
@@ -89,7 +91,7 @@ final class Image {
 
 	private String extractDate() throws IOException {
 		if (!file.isFile())
-			throw new IOException("Ensure that a file was given " + "and not a directory.");
+			throw new NotFileException();
 		
 		return Files.readAttributes(file.toPath(), BasicFileAttributes.class).lastModifiedTime().toString();
 	}
