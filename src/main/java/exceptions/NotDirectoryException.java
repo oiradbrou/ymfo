@@ -1,24 +1,22 @@
 package exceptions;
 
-import java.io.IOException;
-
 /**
- * {@link IOException} that is thrown when the resource provided
- * to a method is supposed to be a directory, but actually is a file.
+ * {@link NotResourceException} that is thrown when the resource provided
+ * to a method was supposed to be a directory, but wasn't.
  * 
  * @author raflat
  */
-public final class NotDirectoryException extends IOException {
+public final class NotDirectoryException extends NotResourceException {
 
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Constructor that creates a {@link NotDirectoryException} with a fixed
-	 * message that informs the user that a file was provided
-	 * instead of a directory.
+	 * Constructor that creates a {@link NotDirectoryException} with
+	 * the message that informs the user that a certain type of resource was 
+	 * provided instead of a directory.
 	 */
 	public NotDirectoryException() {
-		super("Ensure that a directory was provided and not a file");
+		super("directory");
 	}
 
 }

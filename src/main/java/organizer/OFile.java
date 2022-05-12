@@ -22,7 +22,7 @@ final class OFile {
 	 * Static factory method that given the path to a file creates
 	 * it's corresponding OFile.
 	 * 
-	 * @param filePath Path to a file.
+	 * @param filePath - String of path to a file.
 	 */
 	static OFile createFromPath(String filePath) {
 		OFile file = null;
