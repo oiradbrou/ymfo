@@ -8,7 +8,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import exceptions.NotFileException;
 
 /**
- * Class that wraps a file of {@link File} type. <br>
+ * Class that wraps a file of {@link File} type.<br>
  * Provides methods to extract it's date.
  *  
  * @author raflat
@@ -19,18 +19,26 @@ final class OFile {
 	private String date;
 
 	/**
-	 * Static factory method that given a file creates 
-	 * it's correspondent OFile.
+	 * Static factory method that given the path to a file creates
+	 * it's corresponding OFile.
 	 * 
-	 * @param source {@link File} type file to wrap.
+	 * @param filePath Path to a file.
 	 */
-	OFile createFromFile(File file) {
-		return new OFile(file);
+	static OFile createFromPath(String filePath) {
+		OFile file = null;
+		
+		try {
+			file = new OFile(filePath);
+		} catch (NotFileException e) {
+			e.printStackTrace();
+		}
+		
+		return file;
 	}
 
 	/**
-	 * Getter that returns the {@link File} wrapped by the {@link OFile} 
-	 * it's called on.
+	 * Getter that returns the {@link File} that's wrapped 
+	 * by the {@link OFile} it's called on.
 	 * 
 	 * @return File associated to the OFile.
 	 */
@@ -44,7 +52,7 @@ final class OFile {
 	 * 
 	 * @return 
 	 * String representing the number of the year of the
-	 * OFile it's called on. <br>
+	 * OFile it's called on.<br>
 	 * The format of the returned string is "yyyy".
 	 */
 	String extractYear() {
@@ -57,7 +65,7 @@ final class OFile {
 	 * 
 	 * @return
 	 * String representing the number of the month of the OFile 
-	 * it's called on. <br>
+	 * it's called on.<br>
 	 * The format of the returned string is "mm".
 	 */
 	String extractMonth() {
@@ -75,22 +83,22 @@ final class OFile {
 		return name.substring(name.indexOf("."));
 	}
 	
-	private OFile(File file) {
-		this.file = file;
+	private OFile(String path) throws NotFileException {
+		file = new File(path);
 		
+		if (!file.isFile())
+			throw new NotFileException();
+			
 		try {
 			date = extractDate();
-		}
-		catch (IOException e) {
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
-	private String extractDate() throws IOException {
-		if (!file.isFile())
-			throw new NotFileException();
-		
-		return Files.readAttributes(file.toPath(), BasicFileAttributes.class).lastModifiedTime().toString();
+	private String extractDate() throws IOException  {
+		return Files.readAttributes(file.toPath(), BasicFileAttributes.class)
+					.lastModifiedTime().toString();
 	}
 
 }

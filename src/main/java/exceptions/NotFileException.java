@@ -8,7 +8,7 @@ import java.io.IOException;
  * 
  * @author raflat
  */
-public class NotFileException extends IOException {
+public final class NotFileException extends IOException {
 
 	private static final long serialVersionUID = 1L;
 
