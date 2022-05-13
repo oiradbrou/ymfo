@@ -1,8 +1,8 @@
 package organizer;
 
-import java.io.File;
 import java.util.Arrays;
-import java.util.Iterator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import exceptions.NotDirectoryException;
 
@@ -12,9 +12,7 @@ import exceptions.NotDirectoryException;
  * 
  * @author raflat
  */
-final class OFileDirectory {
-
-	private final File fileDir;
+final class OFileDirectory extends ODirectory {
 
 	/**
 	 * Static factory method to create an {@link OFileDirectory} from
@@ -24,39 +22,33 @@ final class OFileDirectory {
 	 * @return New OFileDirectory object associated to provided path.
 	 */
 	static OFileDirectory createFromDir(String dirPath) {
-		OFileDirectory fileDir = null;
+		OFileDirectory dir = null;
 		
 		try {
-			fileDir = new OFileDirectory(dirPath);;
+			dir = new OFileDirectory(dirPath);;
 		} catch (NotDirectoryException e) {
 			e.printStackTrace();
 		}
 		
-		return fileDir;
+		return dir;
 	}
 	
 	/**
-	 * Method that returns an {@link Iterator} of all the files contained
+	 * Method that returns a {@link List} of all the files contained
 	 * in the {@link OFileDirectory} as {@link OFile} objects.
 	 * 
 	 * @return
-	 * Iterator of files contained in the ImagesDirectory
-	 * it's called on.
+	 * List of files contained in the ImagesDirectory it's called on.
 	 */
-	Iterator<OFile> listImages() {
-		return Arrays.asList(fileDir.listFiles())
+	List<OFile> listOFiles() {
+		return Arrays.asList(dir.listFiles())
 					 .parallelStream()
 					 .map(f -> OFile.createFromPath(f.getPath()))
-					 .iterator();
+					 .collect(Collectors.toList());
 	}
 
 	private OFileDirectory(String path) throws NotDirectoryException {
-		File resource = new File(path);
-		
-		if (!resource.isDirectory())
-			throw new NotDirectoryException();
-		
-		fileDir = resource;
+		super(path);
 	}
 	
 }
