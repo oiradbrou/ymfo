@@ -14,9 +14,13 @@ import exceptions.NotDirectoryException;
  */
 abstract class ODirectory {
 
+	/**
+	 * Field that represents the directory that defines the class.
+	 */
 	final File dir;
 	
 	/**
+	 * Constructor that initialises the field {@link #dir}.
 	 * 
 	 * @param dirPath - Path to a directory.
 	 * @throws 
