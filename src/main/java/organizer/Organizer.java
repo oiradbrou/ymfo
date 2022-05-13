@@ -6,7 +6,7 @@ import dirchooser.DirChooser;
 
 public final class Organizer {
 	
-	private ImagesDirectory srcDir;
+	private OFileDirectory srcDir;
 	private StoreDirectory destDir;
 	
 	public static void run() {
@@ -15,17 +15,17 @@ public final class Organizer {
 	}
 	
 	public void setSrcDir(String srcDirPath) {
-		srcDir = ImagesDirectory.fromPath(srcDirPath);
+		srcDir = OFileDirectory.createFromDir(srcDirPath);
 	}
 	
 	public void setDestDir(String destDirPath) {
-		destDir = StoreDirectory.fromPath(destDirPath);
+		destDir = StoreDirectory.createFromDir(destDirPath);
 	}
 	
 	public void renameImages() {
 		LinkedList<String> alreadyPresentDates = destDir.containedDates();
 		
-		for (Image image : srcDir.listImages()) {
+		for (OFile image : srcDir.listOFiles()) {
 			String imageYear = image.extractYear();
 			String imageMonth = image.extractMonth();
 			String imageName = imageYear + "-" + imageMonth;

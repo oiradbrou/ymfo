@@ -4,27 +4,35 @@ import java.io.File;
 import java.util.Arrays;
 import java.util.LinkedList;
 
+import exceptions.NotDirectoryException;
+
 /**
+ * Class that represents the directory in which the files that the user wants
+ * to organise are stored and organised in directories.
  * 
- * 
- * @author
- * raflat
+ * @author raflat
  */
-final class StoreDirectory {
+final class StoreDirectory extends ODirectory {
 
-	private final File destination;
-	
-	static StoreDirectory fromPath(String path) {
-		return new StoreDirectory(path);
+	static StoreDirectory createFromDir(String dirPath) {
+		StoreDirectory dir = null;
+		
+		try {
+			dir = new StoreDirectory(dirPath);;
+		} catch (NotDirectoryException e) {
+			e.printStackTrace();
+		}
+		
+		return dir;
 	}
-
+	
 	LinkedList<String> containedDates() {
 		LinkedList<String> dates = new LinkedList<>(Arrays.asList(""));
 		
-		if (destination.listFiles() == null)
+		if (dir.listFiles() == null)
 			return dates;
 		
-		for (File yearDirectory : destination.listFiles())
+		for (File yearDirectory : dir.listFiles())
 			for (File monthDirectory : yearDirectory.listFiles())
 				dates.addFirst(yearDirectory + "-" + monthDirectory);
 		
@@ -35,14 +43,14 @@ final class StoreDirectory {
 		new File(yearMonthPath(year, month)).mkdirs();
 	}
 	
-	void storeImage(Image image, String name, String year, String month) {
+	void storeImage(OFile image, String name, String year, String month) {
 		image.getFile().renameTo(new File(yearMonthPath(year, month) +
 											"\\" + name + 
 											image.extractDotExtension()));
 	}
 	
 	int lastImageNumber(String imageYear, String imageMonth) {
-		for (File year : destination.listFiles())
+		for (File year : dir.listFiles())
 			if (year.getName().equals(imageYear))
 				for (File month : year.listFiles())
 					if (month.getName().equals(imageMonth))
@@ -50,13 +58,13 @@ final class StoreDirectory {
 		
 		return 0;
 	}
-
-	private StoreDirectory(String path) {
-		this.destination = new File(path);
+	
+	private StoreDirectory(String path) throws NotDirectoryException {
+		super(path);
 	}
 
 	private String yearMonthPath(String year, String month) {
-		return destination.getPath() + "\\" + year + "\\" + month;
+		return dir.getPath() + "\\" + year + "\\" + month;
 	}
 	
 }
