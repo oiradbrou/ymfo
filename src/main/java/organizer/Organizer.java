@@ -20,19 +20,41 @@ public final class Organizer {
 	private OFileDirectory srcDir;
 	private StoreDirectory destDir;
 	
+	/**
+	 * Method that runs the {@link Organizer} by launching the 
+	 * directory selection module.
+	 */
 	public static void run() {
 		Organizer organizer = new Organizer();
 		DirChooser.chooseAndOrganizeWith(organizer);
 	}
 	
+	/**
+	 * Setter to set the source {@link OFileDirectory} from which
+	 * the files to organize are taken, given the path to a
+	 * directory.
+	 * 
+	 * @param srcDirPath - Path to a directory.
+	 */
 	public void setSrcDir(String srcDirPath) {
 		srcDir = OFileDirectory.createFromDir(srcDirPath);
 	}
 	
+	/**
+	 * Setter to set the destination {@link StoreDirectory} to which
+	 * the files to organize are stored, given the path to a
+	 * directory.
+	 * 
+	 * @param destDirPath - Path to a directory.
+	 */
 	public void setDestDir(String destDirPath) {
 		destDir = StoreDirectory.createFromDir(destDirPath);
 	}
 	
+	/**
+	 * Method that organizes the files contained in the source 
+	 * {@link OFileDirectory} by renaming them to their new location.
+	 */
 	public void renameFiles() {
 		LinkedList<String> alreadyPresentDates = destDir.containedDates();
 		
