@@ -1,7 +1,7 @@
-# Compiled class file
+# Compiled class files
 *.class
 
-# Eclipse specific
+# Eclipse
 *.launch
 *.pydevproject
 .project
