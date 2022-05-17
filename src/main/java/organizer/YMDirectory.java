@@ -12,13 +12,14 @@ import exceptions.NotDirectoryException;
  * 
  * @author raflat
  */
-final class StoreDirectory extends ODirectory {
+//update javadoc
+final class YMDirectory extends ODirectory {
 
-	static StoreDirectory createFromDir(String dirPath) {
-		StoreDirectory dir = null;
+	static YMDirectory createFromDir(String dirPath) {
+		YMDirectory dir = null;
 		
 		try {
-			dir = new StoreDirectory(dirPath);;
+			dir = new YMDirectory(dirPath);;
 		} catch (NotDirectoryException e) {
 			e.printStackTrace();
 		}
@@ -59,7 +60,7 @@ final class StoreDirectory extends ODirectory {
 		return 0;
 	}
 	
-	private StoreDirectory(String path) throws NotDirectoryException {
+	private YMDirectory(String path) throws NotDirectoryException {
 		super(path);
 	}
 
