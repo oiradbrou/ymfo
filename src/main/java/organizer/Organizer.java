@@ -18,7 +18,7 @@ import dirchooser.DirChooser;
 public final class Organizer {
 	
 	private OFileDirectory srcDir;
-	private StoreDirectory destDir;
+	private YMDirectory destDir;
 	
 	/**
 	 * Method that runs the {@link Organizer} by launching the 
@@ -48,7 +48,7 @@ public final class Organizer {
 	 * @param destDirPath - Path to a directory.
 	 */
 	public void setDestDir(String destDirPath) {
-		destDir = StoreDirectory.createFromDir(destDirPath);
+		destDir = YMDirectory.createFromDir(destDirPath);
 	}
 	
 	/**
