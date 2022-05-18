@@ -68,7 +68,7 @@ public final class Organizer {
 			
 			imageName += "_" + destDir.lastImageNumber(imageYear, imageMonth);
 			
-			destDir.storeImage(image, imageName, imageYear, imageMonth);
+			destDir.storeOFile(image, imageName, imageYear, imageMonth);
 		}
 	}
 	

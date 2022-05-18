@@ -7,14 +7,29 @@ import java.util.LinkedList;
 import exceptions.NotDirectoryException;
 
 /**
- * Class that represents the directory in which the files that the user wants
- * to organise are stored and organised in directories.
+ * <p>Class that defines a Year/Month type directory.</p>
+ * 
+ * <p>The files inside the directory are organized into two level of directories:
+ * <ol>
+ * 	<li>a first layer consisting of directories denoting the year of the file,</li>
+ * 	<li>a second one composed of directories indicating the month of the file.</li>
+ * </ol>
+ * Furthermore, the files are enumerated from 0 to n, according to how many
+ * of them are contained in the month sub-directory.</p>
  * 
  * @author raflat
  */
-//update javadoc
 final class YMDirectory extends ODirectory {
 
+	/**
+	 * <p>Static factory method that creates and returns a new {@link YMDirectory}
+	 * pointing to the path provided.</p>
+	 * 
+	 * <p>The path provided must be of an existing directory.</p>
+	 * 
+	 * @param dirPath - path to a directory.
+	 * @return New instance of YMDirectory pointing to <b>dirPath</b>.
+	 */
 	static YMDirectory createFromDir(String dirPath) {
 		YMDirectory dir = null;
 		
@@ -27,6 +42,18 @@ final class YMDirectory extends ODirectory {
 		return dir;
 	}
 	
+	/**
+	 * <p>Method that returns the dates already contained in the 
+	 * {@link YMDirectory} it's called on.</p>
+	 * 
+	 * <p>The dates contained are obtained by visiting each sub-directory
+	 * and joining the name of the year one with each of it's month ones,
+	 * obtaining a list of strings in the form "year-month."</p>
+	 * 
+	 * @return 
+	 * {@link LinkedList} containing a string for each year/month couple
+	 * contained in the directory.
+	 */
 	LinkedList<String> containedDates() {
 		LinkedList<String> dates = new LinkedList<>(Arrays.asList(""));
 		
@@ -40,14 +67,31 @@ final class YMDirectory extends ODirectory {
 		return dates;
 	}
 
+	/**
+	 * <p>Method that creates new a sub-directory "<b>year</b>/<b>month</b>"
+	 * inside the {@link YMDirectory} it's called on.</p>
+	 * 
+	 * <p>If not already present, the parent directory "<b>year</b>" 
+	 * is created alongside it's child.</p>
+	 * 
+	 * @param year - name of the parent sub-directory.
+	 * @param month - name of the child sub-directory
+	 */
 	void createDirectory(String year, String month) {
 		new File(yearMonthPath(year, month)).mkdirs();
 	}
 	
-	void storeImage(OFile image, String name, String year, String month) {
-		image.getFile().renameTo(new File(yearMonthPath(year, month) +
-											"\\" + name + 
-											image.extractDotExtension()));
+	/**
+	 * Method that stores
+	 * 
+	 * @param image
+	 * @param name
+	 * @param year
+	 * @param month
+	 */
+	void storeOFile(OFile image, String name, String year, String month) {
+		image.getFile().renameTo(new File(yearMonthPath(year, month) + "\\" + name +
+										  image.extractDotExtension()));
 	}
 	
 	int lastImageNumber(String imageYear, String imageMonth) {
