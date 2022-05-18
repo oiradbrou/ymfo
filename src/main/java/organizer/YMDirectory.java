@@ -95,7 +95,8 @@ final class YMDirectory extends ODirectory {
 		String fileMonth = file.extractMonth();
 		
 		file.getFile().renameTo(new File(yearMonthPath(fileYear, fileMonth) + "\\" +
-										 fileYear + "-" + fileMonth +
+										 fileYear + "-" + fileMonth + "_" +
+										 lastImageNumber(fileYear, fileMonth) +
 										 file.extractDotExtension()));
 	}
 	
