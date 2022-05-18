@@ -47,8 +47,8 @@ final class YMDirectory extends ODirectory {
 	 * {@link YMDirectory} it's called on.</p>
 	 * 
 	 * <p>The dates contained are obtained by visiting each sub-directory
-	 * and merging the name of the year one with each of it's month ones,
-	 * obtaining a list of names in the form "year-month."</p>
+	 * and joining the name of the year one with each of it's month ones,
+	 * obtaining a list of strings in the form "year-month."</p>
 	 * 
 	 * @return 
 	 * {@link LinkedList} containing a string for each year/month couple
@@ -67,14 +67,31 @@ final class YMDirectory extends ODirectory {
 		return dates;
 	}
 
+	/**
+	 * <p>Method that creates new a sub-directory "<b>year</b>/<b>month</b>"
+	 * inside the {@link YMDirectory} it's called on.</p>
+	 * 
+	 * <p>If not already present, the parent directory "<b>year</b>" 
+	 * is created alongside it's child.</p>
+	 * 
+	 * @param year - name of the parent sub-directory.
+	 * @param month - name of the child sub-directory
+	 */
 	void createDirectory(String year, String month) {
 		new File(yearMonthPath(year, month)).mkdirs();
 	}
 	
-	void storeImage(OFile image, String name, String year, String month) {
-		image.getFile().renameTo(new File(yearMonthPath(year, month) +
-											"\\" + name + 
-											image.extractDotExtension()));
+	/**
+	 * Method that stores
+	 * 
+	 * @param image
+	 * @param name
+	 * @param year
+	 * @param month
+	 */
+	void storeOFile(OFile image, String name, String year, String month) {
+		image.getFile().renameTo(new File(yearMonthPath(year, month) + "\\" + name +
+										  image.extractDotExtension()));
 	}
 	
 	int lastImageNumber(String imageYear, String imageMonth) {
