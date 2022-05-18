@@ -82,16 +82,21 @@ final class YMDirectory extends ODirectory {
 	}
 	
 	/**
-	 * Method that stores
+	 * <p>Method that stores a provided {@link OFile} 
+	 * into the {@link YMDirectory} it's called on.</p>
 	 * 
-	 * @param image
-	 * @param name
-	 * @param year
-	 * @param month
+	 * <p>The OFile is stored in the sub-directory correspondent
+	 * to it's date</p>
+	 * 
+	 * @param file
 	 */
-	void storeOFile(OFile image, String name, String year, String month) {
-		image.getFile().renameTo(new File(yearMonthPath(year, month) + "\\" + name +
-										  image.extractDotExtension()));
+	void storeFile(YMFile file) {
+		String fileYear = file.extractYear();
+		String fileMonth = file.extractMonth();
+		
+		file.getFile().renameTo(new File(yearMonthPath(fileYear, fileMonth) + "\\" +
+										 fileYear + "-" + fileMonth +
+										 file.extractDotExtension()));
 	}
 	
 	int lastImageNumber(String imageYear, String imageMonth) {

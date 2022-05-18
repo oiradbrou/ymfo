@@ -40,10 +40,10 @@ final class OFileDirectory extends ODirectory {
 	 * @return
 	 * List of files contained in the ImagesDirectory it's called on.
 	 */
-	List<OFile> listOFiles() {
+	List<YMFile> listOFiles() {
 		return Arrays.asList(dir.listFiles())
 					 .parallelStream()
-					 .map(f -> OFile.createFromPath(f.getPath()))
+					 .map(f -> YMFile.createFromPath(f.getPath()))
 					 .collect(Collectors.toList());
 	}
 

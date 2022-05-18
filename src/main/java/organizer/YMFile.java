@@ -13,7 +13,7 @@ import exceptions.NotFileException;
  *  
  * @author raflat
  */
-final class OFile {
+final class YMFile {
 
 	private final File file;
 	private String date;
@@ -24,11 +24,11 @@ final class OFile {
 	 * 
 	 * @param filePath - String of path to a file.
 	 */
-	static OFile createFromPath(String filePath) {
-		OFile file = null;
+	static YMFile createFromPath(String filePath) {
+		YMFile file = null;
 		
 		try {
-			file = new OFile(filePath);
+			file = new YMFile(filePath);
 		} catch (NotFileException e) {
 			e.printStackTrace();
 		}
@@ -71,7 +71,7 @@ final class OFile {
 	String extractMonth() {
 		return date.substring(5, 7);
 	}
-	
+		
 	/**
 	 * Method that extracts the extension of the {@link OFile}, 
 	 * preceded by a dot.
@@ -83,7 +83,7 @@ final class OFile {
 		return name.substring(name.indexOf("."));
 	}
 	
-	private OFile(String path) throws NotFileException {
+	private YMFile(String path) throws NotFileException {
 		file = new File(path);
 		
 		if (!file.isFile())
