@@ -21,8 +21,7 @@ class NotResourceException extends IOException {
 	 * resourceName - String that represents the name of the expected resource.
 	 */
 	NotResourceException(String resourceName) {
-		super("Ensure that a " + resourceName + 
-			  " was provided and not another type of resource.");
+		super("Ensure that a " + resourceName + " was provided and not another type of resource.");
 	}
 	
 }
