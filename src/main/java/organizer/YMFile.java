@@ -31,6 +31,8 @@ final class YMFile {
 			file = new YMFile(filePath);
 		} catch (NotFileException e) {
 			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		
 		return file;
@@ -83,17 +85,13 @@ final class YMFile {
 		return name.substring(name.indexOf("."));
 	}
 	
-	private YMFile(String path) throws NotFileException {
+	private YMFile(String path) throws NotFileException, IOException {
 		file = new File(path);
 		
 		if (!file.isFile())
 			throw new NotFileException();
 			
-		try {
-			date = extractDate();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		date = extractDate();
 	}
 
 	private String extractDate() throws IOException  {

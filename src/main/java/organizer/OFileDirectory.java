@@ -12,6 +12,7 @@ import exceptions.NotDirectoryException;
  * 
  * @author raflat
  */
+//rename to YMFileDirectory
 final class OFileDirectory extends ODirectory {
 
 	/**
