@@ -58,7 +58,7 @@ public final class Organizer {
 	public void renameFiles() {
 		LinkedList<String> alreadyPresentDates = destDir.containedDates();
 		
-		for (YMFile image : srcDir.listOFiles()) {
+		for (YMFile image : srcDir.listFiles()) {
 			String imageYear = image.extractYear();
 			String imageMonth = image.extractMonth();
 			String imageName = imageYear + "-" + imageMonth;
