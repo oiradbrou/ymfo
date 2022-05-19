@@ -57,9 +57,6 @@ final class YMDirectory extends ODirectory {
 	LinkedList<String> containedDates() {
 		LinkedList<String> dates = new LinkedList<>(Arrays.asList(""));
 		
-		if (dir.listFiles() == null)
-			return dates;
-		
 		for (File yearDirectory : dir.listFiles())
 			for (File monthDirectory : yearDirectory.listFiles())
 				dates.addFirst(yearDirectory + "-" + monthDirectory);
