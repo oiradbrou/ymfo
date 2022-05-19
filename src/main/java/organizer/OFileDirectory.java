@@ -1,5 +1,6 @@
 package organizer;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -41,10 +42,11 @@ final class OFileDirectory extends ODirectory {
 	 * @return
 	 * List of files contained in the ImagesDirectory it's called on.
 	 */
-	List<YMFile> listOFiles() {
+	List<YMFile> listFiles() {
 		return Arrays.asList(dir.listFiles())
 					 .parallelStream()
-					 .map(f -> YMFile.createFromPath(f.getPath()))
+					 .map(File::getPath)
+					 .map(YMFile::createFromPath)
 					 .collect(Collectors.toList());
 	}
 
