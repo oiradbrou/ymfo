@@ -23,19 +23,10 @@ final class YMFile {
 	 * it's corresponding OFile.
 	 * 
 	 * @param filePath - String of path to a file.
+	 * @throws NotFileException 
 	 */
-	static YMFile createFromPath(String filePath) {
-		YMFile file = null;
-		
-		try {
-			file = new YMFile(filePath);
-		} catch (NotFileException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-		return file;
+	static YMFile createFromPath(String filePath) throws NotFileException {
+		return new YMFile(filePath);
 	}
 
 	/**
@@ -85,7 +76,7 @@ final class YMFile {
 		return name.substring(name.indexOf("."));
 	}
 	
-	private YMFile(String path) throws NotFileException, IOException {
+	private YMFile(String path) throws NotFileException {
 		file = new File(path);
 		
 		if (!file.isFile())
@@ -94,9 +85,15 @@ final class YMFile {
 		date = extractDate();
 	}
 
-	private String extractDate() throws IOException  {
-		return Files.readAttributes(file.toPath(), BasicFileAttributes.class)
-					.lastModifiedTime().toString();
+	private String extractDate()  {
+		String date = null;
+		try {
+			date = Files.readAttributes(file.toPath(), BasicFileAttributes.class)
+								.lastModifiedTime().toString();
+		} catch (IOException e) {
+			 System.err.println("Error  test file.");
+		}
+		return date;
 	}
 
 }
