@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import exceptions.NotDirectoryException;
+import exceptions.NotFileException;
 
 /**
  * Class that serves the purpose of representing the directory from which
@@ -14,7 +15,7 @@ import exceptions.NotDirectoryException;
  * @author raflat
  */
 //rename to YMFileDirectory
-final class OFileDirectory extends ODirectory {
+final class YMFileDirectory extends ODirectory {
 
 	/**
 	 * Static factory method to create an {@link OFileDirectory} from
@@ -23,11 +24,11 @@ final class OFileDirectory extends ODirectory {
 	 * @param dirPath Path to a directory.
 	 * @return New OFileDirectory object associated to provided path.
 	 */
-	static OFileDirectory createFromDir(String dirPath) {
-		OFileDirectory dir = null;
+	static YMFileDirectory createFromDir(String dirPath) {
+		YMFileDirectory dir = null;
 		
 		try {
-			dir = new OFileDirectory(dirPath);;
+			dir = new YMFileDirectory(dirPath);;
 		} catch (NotDirectoryException e) {
 			e.printStackTrace();
 		}
@@ -46,11 +47,16 @@ final class OFileDirectory extends ODirectory {
 		return Arrays.asList(dir.listFiles())
 					 .parallelStream()
 					 .map(File::getPath)
-					 .map(YMFile::createFromPath)
+					 .map(path -> { 
+						 	try {
+						 		return YMFile.createFromPath(path);
+						 	} catch (NotFileException e) {
+						 		System.err.println("Ensure that the directory only contains files.");
+						 		return null;}})
 					 .collect(Collectors.toList());
 	}
 
-	private OFileDirectory(String path) throws NotDirectoryException {
+	private YMFileDirectory(String path) throws NotDirectoryException {
 		super(path);
 	}
 	
