@@ -1,11 +1,10 @@
 package organizer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
-
-import exceptions.NotFileException;
 
 /**
  * Class that wraps a file of {@link File} type.<br>
@@ -25,7 +24,7 @@ final class YMFile {
 	 * @param filePath - String of path to a file.
 	 * @throws NotFileException 
 	 */
-	static YMFile createFromPath(String filePath) throws NotFileException {
+	static YMFile createFromPath(String filePath) throws FileNotFoundException {
 		return new YMFile(filePath);
 	}
 
@@ -76,11 +75,11 @@ final class YMFile {
 		return name.substring(name.indexOf("."));
 	}
 	
-	private YMFile(String path) throws NotFileException {
+	private YMFile(String path) throws FileNotFoundException {
 		file = new File(path);
 		
 		if (!file.isFile())
-			throw new NotFileException();
+			throw new FileNotFoundException("Error trying to use the file at " + path);
 			
 		date = extractDate();
 	}
@@ -91,7 +90,7 @@ final class YMFile {
 			date = Files.readAttributes(file.toPath(), BasicFileAttributes.class)
 								.lastModifiedTime().toString();
 		} catch (IOException e) {
-			 System.err.println("Error  test file.");
+			 System.err.println("Error test file.");
 		}
 		return date;
 	}
