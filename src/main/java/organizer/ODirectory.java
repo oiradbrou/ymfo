@@ -1,8 +1,7 @@
 package organizer;
 
 import java.io.File;
-
-import exceptions.NotDirectoryException;
+import java.nio.file.NotDirectoryException;
 
 /**
  * Abstract class that serves the purpose of extracting the common parts
@@ -31,7 +30,7 @@ abstract class ODirectory {
 		File resource = new File(dirPath);
 		
 		if (!resource.isDirectory())
-			throw new NotDirectoryException();
+			throw new NotDirectoryException(dirPath);
 		
 		dir = resource;
 	}

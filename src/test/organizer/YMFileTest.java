@@ -4,6 +4,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Date;
 import java.time.LocalDate;
@@ -14,32 +15,31 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-import exceptions.NotFileException;
-
 public class YMFileTest {
+	
+	@ClassRule
+	public static TemporaryFolder dir = new TemporaryFolder();
 	
 	private static File testFile;
 	private static YMFile testYMFile;
 	private static final String TEST_FILE_EXTENSION = ".txt";
 	private static final String TEST_FILE_NAME = "testFile" + TEST_FILE_EXTENSION;
-	private static final String INVALID_PATH = "";
-	private static final String NOTFILEEXCEPTION_MESSAGE = new NotFileException().getMessage();
-	
-	@ClassRule
-	public static TemporaryFolder folder = new TemporaryFolder();
+	private static final String INVALID_PATH = "ivalid path";
+	private static final String NOTFILEEXCEPTION_MESSAGE = "Error trying to use the file at " + 
+														   testFile.getPath();
 
 	@BeforeClass
-	public static void init() throws NotFileException, IOException {
+	public static void init() throws FileNotFoundException, IOException {
 		try {
-			testFile = folder.newFile(TEST_FILE_NAME);
+			testFile = dir.newFile(TEST_FILE_NAME);
 		} catch (IOException e) {
-			 System.err.println("Error creating temporary test file.");
+			System.err.println("Error creating temporary test file.");
 		}
 		testYMFile = YMFile.createFromPath(testFile.getPath());
 	}
 	
 	@Test
-	public void testCreateFromPathWithValidPath() throws NotFileException, IOException {
+	public void testCreateFromPathWithValidPath() throws FileNotFoundException, IOException {
 		assertThat(YMFile.createFromPath(testFile.getPath()))
 			.isInstanceOf(YMFile.class);
 	}
@@ -47,18 +47,18 @@ public class YMFileTest {
 	@Test
 	public void testCreateFromPathWithInvalidPath() {		
 		assertThatThrownBy(() -> YMFile.createFromPath(INVALID_PATH))
-			.isInstanceOf(NotFileException.class)
+			.isInstanceOf(FileNotFoundException.class)
 			.hasMessage(NOTFILEEXCEPTION_MESSAGE);
 		
 		File testDir = null;
 		try  {
-			testDir = folder.newFolder("TestDirectory");
+			testDir = dir.newFolder("TestDirectory");
 		} catch (IOException e) {
 			 System.err.println("Error creating temporary test directory.");
 		}
 		String testDirPath = testDir.getPath();
 		assertThatThrownBy(() -> YMFile.createFromPath(testDirPath))
-			.isInstanceOf(NotFileException.class)
+			.isInstanceOf(FileNotFoundException.class)
 			.hasMessage(NOTFILEEXCEPTION_MESSAGE);;
 	}
 	

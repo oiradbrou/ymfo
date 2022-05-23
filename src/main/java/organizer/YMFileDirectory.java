@@ -1,12 +1,11 @@
 package organizer;
 
 import java.io.File;
+import java.io.FileNotFoundException;
+import java.nio.file.NotDirectoryException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import exceptions.NotDirectoryException;
-import exceptions.NotFileException;
 
 /**
  * Class that serves the purpose of representing the directory from which
@@ -23,17 +22,10 @@ final class YMFileDirectory extends ODirectory {
 	 * 
 	 * @param dirPath Path to a directory.
 	 * @return New OFileDirectory object associated to provided path.
+	 * @throws NotDirectoryException 
 	 */
-	static YMFileDirectory createFromDir(String dirPath) {
-		YMFileDirectory dir = null;
-		
-		try {
-			dir = new YMFileDirectory(dirPath);;
-		} catch (NotDirectoryException e) {
-			e.printStackTrace();
-		}
-		
-		return dir;
+	static YMFileDirectory createFromDir(String dirPath) throws NotDirectoryException {
+		return new YMFileDirectory(dirPath);
 	}
 	
 	/**
@@ -50,7 +42,7 @@ final class YMFileDirectory extends ODirectory {
 					 .map(path -> { 
 						 	try {
 						 		return YMFile.createFromPath(path);
-						 	} catch (NotFileException e) {
+						 	} catch (FileNotFoundException e) {
 						 		System.err.println("Ensure that the directory only contains files.");
 						 		return null;}})
 					 .collect(Collectors.toList());
