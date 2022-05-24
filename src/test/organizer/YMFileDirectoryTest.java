@@ -1,12 +1,15 @@
 package organizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.NotDirectoryException;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.BeforeClass;
 import org.junit.ClassRule;
@@ -16,17 +19,12 @@ import org.junit.rules.TemporaryFolder;
 public class YMFileDirectoryTest {
 	
 	@ClassRule
-	public static TemporaryFolder dir = new TemporaryFolder();
+	public static final TemporaryFolder dir = new TemporaryFolder();
 
-	private static List<YMFile> testFiles;
-	private static YMFileDirectory testDir;
+	private static List<YMFile> testFiles = new LinkedList<>();
 	private static final int NUMBER_OF_FILES = 10;
 	private static final String INVALID_PATH = "invalid path";
-	//change error to java one
-	private static final String NOTDIRECTORYEXCEPTION_MESSAGE = new NotDirectoryException(dir.getRoot()
-																							 .getPath())
-																							 .getMessage();
-
+																						
 	@BeforeClass
 	public static void init() throws FileNotFoundException, IOException {
 		try {
@@ -45,9 +43,29 @@ public class YMFileDirectoryTest {
 			.isInstanceOf(YMFileDirectory.class);
 	}
 	
+	@Test
 	public void testCreateFromDirWithInvalidPath() throws NotDirectoryException {
-		assertThat(YMFileDirectory.createFromDir(INVALID_PATH))
-			.isInstanceOf(YMFileDirectory.class);
+		assertThatThrownBy(() -> YMFileDirectory.createFromDir(INVALID_PATH))
+			.isInstanceOf(NotDirectoryException.class)
+			.hasMessage(INVALID_PATH);
 	}
+	
+	@Test
+	public void testListFiles() {
+		YMFileDirectory testDir = null;
+		try {
+			testDir = YMFileDirectory.createFromDir(dir.getRoot().getPath());
+		} catch (NotDirectoryException e) {
+			System.err.println("Error creating temporary test directory.");
+		}
+		List<String> filePaths = testFiles.parallelStream()
+										  .map(f -> f.getFile().getPath())
+										  .collect(Collectors.toList());
+		
+		assertThat(testDir.listFiles())
+			.allMatch(f -> filePaths.contains(f.getFile().getPath()));
+	}
+	
+	
 
 }
