@@ -18,7 +18,7 @@ import org.junit.rules.TemporaryFolder;
 public class YMFileTest {
 	
 	@ClassRule
-	public static TemporaryFolder dir = new TemporaryFolder();
+	public static final TemporaryFolder dir = new TemporaryFolder();
 	
 	private static File testFile;
 	private static YMFile testYMFile;
@@ -49,17 +49,6 @@ public class YMFileTest {
 		assertThatThrownBy(() -> YMFile.createFromPath(INVALID_PATH))
 			.isInstanceOf(FileNotFoundException.class)
 			.hasMessage(NOTFILEEXCEPTION_MESSAGE);
-		
-		File testDir = null;
-		try  {
-			testDir = dir.newFolder("TestDirectory");
-		} catch (IOException e) {
-			 System.err.println("Error creating temporary test directory.");
-		}
-		String testDirPath = testDir.getPath();
-		assertThatThrownBy(() -> YMFile.createFromPath(testDirPath))
-			.isInstanceOf(FileNotFoundException.class)
-			.hasMessage(NOTFILEEXCEPTION_MESSAGE);;
 	}
 	
 	@Test
