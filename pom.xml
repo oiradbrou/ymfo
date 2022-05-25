@@ -2,13 +2,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>raflat</groupId>
     <artifactId>imagerenamer</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1-SNAPSHOT</version>
 
 	<dependencies>
 		<dependency>
-    		<groupId>org.ini4j</groupId>
-    		<artifactId>ini4j</artifactId>
-    		<version>0.5.4</version>
+    			<groupId>org.ini4j</groupId>
+    			<artifactId>ini4j</artifactId>
+    			<version>0.5.4</version>
 		</dependency>
 		<dependency>
   			<groupId>org.assertj</groupId>
