@@ -59,8 +59,8 @@ public class YMFileDirectoryTest {
 			System.err.println("Error creating temporary test directory.");
 		}
 		List<String> filePaths = testFiles.parallelStream()
-										  .map(f -> f.getFile().getPath())
-										  .collect(Collectors.toList());
+						  .map(f -> f.getFile().getPath())
+						  .collect(Collectors.toList());
 		
 		assertThat(testDir.listFiles())
 			.allMatch(f -> filePaths.contains(f.getFile().getPath()));
