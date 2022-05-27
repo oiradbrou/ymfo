@@ -7,10 +7,10 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 
 /**
- * Class that wraps a file, providing methods to extract it's date
- * and rename it according to that.<br>
- * The date extracted is the one referring to the last time
- * the file was modified.
+ * Class that wraps a file, providing methods to extract it's date and rename
+ * it.<br>
+ * The date extracted is the one referring to the last time the file was
+ * modified.
  */
 final class YMFile {
 
@@ -18,12 +18,11 @@ final class YMFile {
 	private final String date;
 
 	/**
-	 * Static factory method that, given the path to a file, creates
-	 * it's corresponding {@link YMFile} and returns it.
+	 * Static factory method that, given the path to a file, creates it's
+	 * corresponding {@link YMFile} and returns it.
 	 *
 	 * @param filePath - {@link String} of path to a file.
-	 * @throws FileNotFoundException
-	 * if <b>filePath</b> leads to a resource
+	 * @throws FileNotFoundException if <b>filePath</b> leads to a resource
 	 * that isn't a file.
 	 */
 	static YMFile createFromPath(String filePath) throws FileNotFoundException {
@@ -31,18 +30,8 @@ final class YMFile {
 	}
 
 	/**
-	 * Getter that returns the {@link File} that's wrapped
-	 * by the {@link YMFile} it's called on.
-	 *
-	 * @return File associated to the OFile.
-	 */
-	File getFile() {
-		return file;
-	}
-
-	/**
-	 * Method that extracts the year's number of the {@link YMFile}
-	 * it's called on.
+	 * Method that extracts the year's number of the {@link YMFile} it's called
+	 * on.
 	 *
 	 * @return Year as {@link String} formatted like "yyyy".
 	 */
@@ -51,8 +40,8 @@ final class YMFile {
 	}
 
 	/**
-	 * Method that extracts the month's number of the {@link YMFile}
-	 * date it's called on.
+	 * Method that extracts the month's number of the {@link YMFile} date it's
+	 * called on.
 	 *
 	 * @return Month as {@link String} formatted like "mm".
 	 */
@@ -69,6 +58,16 @@ final class YMFile {
 	String extractDotExtension() {
 		String name = file.getName();
 		return name.substring(name.indexOf("."));
+	}
+	
+	/**
+	 * Method that changes the {@link YMFile}'s pathname to the provided
+	 * one.<br>
+	 *
+	 * @param newPathname - {@link String} representing the new pathname.
+	 */
+	void changePathnameTo(String newPathname) {
+		file.renameTo(new File(newPathname));
 	}
 
 	private YMFile(String path) throws FileNotFoundException {
