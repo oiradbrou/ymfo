@@ -16,10 +16,10 @@ final class YMFile {
 
 	private final File file;
 	private final String date;
-	
+
 	/**
 	 * Getter that return the path of the {@link YMFile} it's called on.
-	 * 
+	 *
 	 * @return Path as a {@link String}.
 	 */
 	String getPath() {
@@ -68,7 +68,7 @@ final class YMFile {
 		String name = file.getName();
 		return name.substring(name.indexOf("."));
 	}
-	
+
 	/**
 	 * Method that changes the {@link YMFile}'s path to the provided
 	 * one.<br>
