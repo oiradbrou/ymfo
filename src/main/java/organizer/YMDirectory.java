@@ -1,10 +1,9 @@
 package organizer;
 
 import java.io.File;
+import java.nio.file.NotDirectoryException;
 import java.util.Arrays;
 import java.util.LinkedList;
-
-import exceptions.NotDirectoryException;
 
 /**
  * <p>Class that defines a Year/Month type directory.</p>
@@ -32,9 +31,9 @@ final class YMDirectory extends ODirectory {
 	 */
 	static YMDirectory createFromDir(String dirPath) {
 		YMDirectory dir = null;
-		
+	
 		try {
-			dir = new YMDirectory(dirPath);;
+			dir = new YMDirectory(dirPath);
 		} catch (NotDirectoryException e) {
 			e.printStackTrace();
 		}

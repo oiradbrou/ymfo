@@ -26,7 +26,7 @@ abstract class ODirectory {
 	 * NotDirectoryException if the path provided leads to a resource
 	 * that isn't a directory.
 	 */
-	ODirectory(String dirPath) throws NotDirectoryException {
+	ODirectory(String dirPath) throws NotDirectoryException  {
 		File resource = new File(dirPath);
 		
 		if (!resource.isDirectory())
