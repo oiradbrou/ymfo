@@ -7,8 +7,8 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 
 /**
- * Class that wraps a file, providing methods to extract it's date and rename
- * it.<br>
+ * Class that wraps a file, providing methods to extract it's date and change
+ * it's path.<br>
  * The date extracted is the one referring to the last time the file was
  * modified.
  */
