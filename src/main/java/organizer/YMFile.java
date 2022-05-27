@@ -16,6 +16,15 @@ final class YMFile {
 
 	private final File file;
 	private final String date;
+	
+	/**
+	 * Getter that return the path of the {@link YMFile} it's called on.
+	 * 
+	 * @return Path as a {@link String}.
+	 */
+	String getPath() {
+		return file.getPath();
+	}
 
 	/**
 	 * Static factory method that, given the path to a file, creates it's
@@ -61,13 +70,13 @@ final class YMFile {
 	}
 	
 	/**
-	 * Method that changes the {@link YMFile}'s pathname to the provided
+	 * Method that changes the {@link YMFile}'s path to the provided
 	 * one.<br>
 	 *
-	 * @param newPathname - {@link String} representing the new pathname.
+	 * @param newPath - {@link String} representing the new path.
 	 */
-	void changePathnameTo(String newPathname) {
-		file.renameTo(new File(newPathname));
+	void changePathTo(String newPath) {
+		file.renameTo(new File(newPath));
 	}
 
 	private YMFile(String path) throws FileNotFoundException {
