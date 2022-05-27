@@ -1,5 +1,6 @@
 package organizer;
 
+import java.nio.file.NotDirectoryException;
 import java.util.LinkedList;
 
 import dirchooser.DirChooser;
@@ -17,7 +18,7 @@ import dirchooser.DirChooser;
  */
 public final class Organizer {
 	
-	private OFileDirectory srcDir;
+	private YMFileDirectory srcDir;
 	private YMDirectory destDir;
 	
 	/**
@@ -35,9 +36,10 @@ public final class Organizer {
 	 * directory.
 	 * 
 	 * @param srcDirPath - Path to a directory.
+	 * @throws NotDirectoryException 
 	 */
-	public void setSrcDir(String srcDirPath) {
-		srcDir = OFileDirectory.createFromDir(srcDirPath);
+	public void setSrcDir(String srcDirPath) throws NotDirectoryException {
+		srcDir = YMFileDirectory.createFromDir(srcDirPath);
 	}
 	
 	/**
