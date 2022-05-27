@@ -45,7 +45,7 @@ public class YMFileTest {
 	}
 	
 	@Test
-	public void testCreateFromPathWithInvalidPath() {		
+	public void testCreateFromPathWithInvalidPath() {
 		assertThatThrownBy(() -> YMFile.createFromPath(INVALID_PATH))
 			.isInstanceOf(FileNotFoundException.class)
 			.hasMessage(NOTFILEEXCEPTION_MESSAGE);
