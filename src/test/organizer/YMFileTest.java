@@ -25,8 +25,7 @@ public class YMFileTest {
 	private static final String TEST_FILE_EXTENSION = ".txt";
 	private static final String TEST_FILE_NAME = "testFile" + TEST_FILE_EXTENSION;
 	private static final String INVALID_PATH = "ivalid path";
-	private static final String NOTFILEEXCEPTION_MESSAGE = "Error trying to use the file at " + 
-														   testFile.getPath();
+	private static String NOTFILEEXCEPTION_MESSAGE;
 
 	@BeforeClass
 	public static void init() throws FileNotFoundException, IOException {
@@ -36,6 +35,9 @@ public class YMFileTest {
 			System.err.println("Error creating temporary test file.");
 		}
 		testYMFile = YMFile.createFromPath(testFile.getPath());
+		
+		NOTFILEEXCEPTION_MESSAGE = "Error trying to use the file at " + 
+								   INVALID_PATH;
 	}
 	
 	@Test
@@ -53,8 +55,8 @@ public class YMFileTest {
 	
 	@Test
 	public void testGetFileReturnsCorrectInstance() {
-		assertThat(testYMFile.getFile())
-			.isEqualTo(testFile);
+		assertThat(testYMFile.getPath())
+			.isEqualTo(testFile.getPath());
 	}
 	
 	@Test
