@@ -52,20 +52,19 @@ public class YMFileDirectoryTest {
 	
 	@Test
 	public void testListFiles() {
+		List<String> filePaths = testFiles.parallelStream()
+				  .map(YMFile::getPath)
+				  .collect(Collectors.toList());
+		
 		YMFileDirectory testDir = null;
 		try {
 			testDir = YMFileDirectory.createFromDir(dir.getRoot().getPath());
 		} catch (NotDirectoryException e) {
 			System.err.println("Error creating temporary test directory.");
 		}
-		List<String> filePaths = testFiles.parallelStream()
-						  .map(f -> f.getFile().getPath())
-						  .collect(Collectors.toList());
 		
 		assertThat(testDir.listFiles())
-			.allMatch(f -> filePaths.contains(f.getFile().getPath()));
+			.allMatch(f -> filePaths.contains(f.getPath()));
 	}
 	
-	
-
 }
