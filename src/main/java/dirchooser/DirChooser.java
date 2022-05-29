@@ -6,6 +6,7 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.nio.file.NotDirectoryException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -48,11 +49,19 @@ public final class DirChooser extends JFrame implements ActionListener {
 				String choosedDirPath = dirChooser.getSelectedFile().getAbsolutePath();
 
 				if (pressedButton == srcButton) {
-					organizer.setSrcDir(choosedDirPath);
+					try {
+						organizer.setSrcDir(choosedDirPath);
+					} catch (NotDirectoryException e1) {
+						e1.printStackTrace();
+					}
 					srcTextField.setText(choosedDirPath);
 				}
 				else if (pressedButton == destButton) {
-					organizer.setDestDir(choosedDirPath);
+					try {
+						organizer.setDestDir(choosedDirPath);
+					} catch (NotDirectoryException e1) {
+						e1.printStackTrace();
+					}
 					destTextField.setText(choosedDirPath);
 				}
 			}
