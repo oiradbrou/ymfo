@@ -18,7 +18,7 @@ import dirchooser.DirChooser;
  */
 public final class Organizer {
 
-	private YMFileDirectory srcDir;
+	private SrcDirectory srcDir;
 	private YMDirectory destDir;
 
 	/**
@@ -39,7 +39,7 @@ public final class Organizer {
 	 * @throws NotDirectoryException
 	 */
 	public void setSrcDir(String srcDirPath) throws NotDirectoryException {
-		srcDir = YMFileDirectory.createFromDir(srcDirPath);
+		srcDir = SrcDirectory.createFromDir(srcDirPath);
 	}
 
 	/**
