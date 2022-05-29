@@ -13,8 +13,6 @@ import dirchooser.DirChooser;
  * second one composed of directories indicating the month of the file.
  * Furthermore, the files are enumerated from 0 to n, according to how many
  * of them are contained in the directory.
- *
- * @author raflat
  */
 public final class Organizer {
 
@@ -48,8 +46,9 @@ public final class Organizer {
 	 * directory.
 	 *
 	 * @param destDirPath - Path to a directory.
+	 * @throws NotDirectoryException 
 	 */
-	public void setDestDir(String destDirPath) {
+	public void setDestDir(String destDirPath) throws NotDirectoryException {
 		destDir = YMDirectory.createFromDir(destDirPath);
 	}
 
@@ -58,20 +57,7 @@ public final class Organizer {
 	 * {@link OFileDirectory} by renaming them to their new location.
 	 */
 	public void renameFiles() {
-		LinkedList<String> alreadyPresentDates = destDir.containedDates();
-
-		for (YMFile image : srcDir.getFiles()) {
-			String imageYear = image.extractYear();
-			String imageMonth = image.extractMonth();
-			String imageName = imageYear + "-" + imageMonth;
-
-			if (!alreadyPresentDates.contains(imageName))
-				destDir.createDirectory(imageYear, imageMonth);
-
-			imageName += "_" + destDir.lastImageNumber(imageYear, imageMonth);
-
-			destDir.storeFile(image);
-		}
+		srcDir.getFiles().forEach(destDir::storeFile);
 	}
 
 }
