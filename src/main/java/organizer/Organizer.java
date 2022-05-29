@@ -39,7 +39,7 @@ public final class Organizer {
 	 * @throws NotDirectoryException
 	 */
 	public void setSrcDir(String srcDirPath) throws NotDirectoryException {
-		srcDir = YMFileDirectory.createFromDir(srcDirPath);
+		srcDir = SrcDirectory.createFromDir(srcDirPath);
 	}
 
 	/**
