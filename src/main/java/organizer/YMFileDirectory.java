@@ -18,7 +18,7 @@ final class YMFileDirectory extends Directory {
 	/**
 	 * Static factory method that creates and returns a {@link YMFileDirectory}
 	 * from a given path.
-	 * 
+	 *
 	 * @param dirPath - Path to a directory.
 	 * @return New YMFileDirectory object.
 	 * @throws NotDirectoryException If <b>dirPath</b> leads to a resource
@@ -27,18 +27,18 @@ final class YMFileDirectory extends Directory {
 	static YMFileDirectory createFromDir(String dirPath) throws NotDirectoryException {
 		return new YMFileDirectory(dirPath);
 	}
-	
+
 	/**
 	 * Getter that returns a {@link List} of all the files contained
 	 * in the {@link YMFileDirectory} as {@link YMFile} objects.
-	 * 
+	 *
 	 * @return List of files.
 	 */
 	List<YMFile> getFiles() {
 		return Arrays.asList(dir.listFiles())
 					 .parallelStream()
 					 .map(File::getPath)
-					 .map(path -> { 
+					 .map(path -> {
 						 	try {
 						 		return YMFile.createFromPath(path);
 						 	} catch (FileNotFoundException e) {
@@ -50,5 +50,5 @@ final class YMFileDirectory extends Directory {
 	private YMFileDirectory(String path) throws NotDirectoryException {
 		super(path);
 	}
-	
+
 }

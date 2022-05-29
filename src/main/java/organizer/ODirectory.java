@@ -14,21 +14,21 @@ abstract class Directory {
 	 * Field that represents the directory to which the class refers.
 	 */
 	final File dir;
-	
+
 	/**
 	 * Constructor that initializes the field {@link #dir}.
-	 * 
+	 *
 	 * @param dirPath - Path to a directory.
 	 * @throws NotDirectoryException If the path provided leads to a resource
 	 * that isn't a directory.
 	 */
 	Directory(String dirPath) throws NotDirectoryException {
 		File resource = new File(dirPath);
-		
+
 		if (!resource.isDirectory())
 			throw new NotDirectoryException(dirPath);
-		
+
 		dir = resource;
 	}
-	
+
 }
