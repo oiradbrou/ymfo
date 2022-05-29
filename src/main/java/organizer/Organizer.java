@@ -13,8 +13,6 @@ import dirchooser.DirChooser;
  * second one composed of directories indicating the month of the file.
  * Furthermore, the files are enumerated from 0 to n, according to how many
  * of them are contained in the directory.
- *
- * @author raflat
  */
 public final class Organizer {
 
