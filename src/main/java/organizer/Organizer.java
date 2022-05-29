@@ -48,8 +48,9 @@ public final class Organizer {
 	 * directory.
 	 *
 	 * @param destDirPath - Path to a directory.
+	 * @throws NotDirectoryException 
 	 */
-	public void setDestDir(String destDirPath) {
+	public void setDestDir(String destDirPath) throws NotDirectoryException {
 		destDir = YMDirectory.createFromDir(destDirPath);
 	}
 
