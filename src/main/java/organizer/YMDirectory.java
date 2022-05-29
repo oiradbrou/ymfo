@@ -24,17 +24,11 @@ final class YMDirectory extends Directory {
 	 *
 	 * @param dirPath - Path to a directory.
 	 * @return New instance of YMDirectory pointing to <b>dirPath</b>.
+	 * @throws NotDirectoryException - If <b>dirPath</b> leads to a resource
+	 * that isn't a directory.
 	 */
-	static YMDirectory createFromDir(String dirPath) {
-		YMDirectory dir = null;
-
-		try {
-			dir = new YMDirectory(dirPath);
-		} catch (NotDirectoryException e) {
-			e.printStackTrace();
-		}
-
-		return dir;
+	static YMDirectory createFromDir(String dirPath) throws NotDirectoryException {
+		return new YMDirectory(dirPath);
 	}
 
 	/**
