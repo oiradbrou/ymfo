@@ -39,7 +39,7 @@ public class YMDirectoryTest {
 	@Test
 	public void testCreateFromDirWithValidPath() throws NotDirectoryException {
 		assertThat(YMDirectory.createFromDir(dir.getRoot().getPath()))
-			.isInstanceOf(SrcDirectory.class);
+			.isInstanceOf(YMDirectory.class);
 	}
 	
 	@Test

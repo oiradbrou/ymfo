@@ -30,6 +30,18 @@ final class YMDirectory extends Directory {
 	static YMDirectory createFromDir(String dirPath) throws NotDirectoryException {
 		return new YMDirectory(dirPath);
 	}
+	
+	/**
+	 * Method that creates new a sub-directory "<b>year</b>/<b>month</b>"
+	 * inside the {@link YMDirectory} it's called on. If not already present,
+	 * the parent directory "<b>year</b>" is created alongside it's child.<br>
+	 *
+	 * @param year - Name of the parent sub-directory.
+	 * @param month - Name of the child sub-directory
+	 */
+	void createDirectory(String year, String month) {
+		new File(yearMonthPath(year, month)).mkdirs();
+	}
 
 	/**
 	 * Method that returns the dates already contained in the
@@ -49,18 +61,6 @@ final class YMDirectory extends Directory {
 				dates.addFirst(yearDirectory + "-" + monthDirectory);
 
 		return dates;
-	}
-
-	/**
-	 * Method that creates new a sub-directory "<b>year</b>/<b>month</b>"
-	 * inside the {@link YMDirectory} it's called on. If not already present,
-	 * the parent directory "<b>year</b>" is created alongside it's child.<br>
-	 *
-	 * @param year - Name of the parent sub-directory.
-	 * @param month - Name of the child sub-directory
-	 */
-	void createDirectory(String year, String month) {
-		new File(yearMonthPath(year, month)).mkdirs();
 	}
 
 	/**
