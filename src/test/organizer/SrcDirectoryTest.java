@@ -16,7 +16,7 @@ import org.junit.ClassRule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 
-public class YMFileDirectoryTest {
+public class SrcDirectoryTest {
 	
 	@ClassRule
 	public static final TemporaryFolder dir = new TemporaryFolder();
@@ -39,13 +39,13 @@ public class YMFileDirectoryTest {
 	
 	@Test
 	public void testCreateFromDirWithValidPath() throws NotDirectoryException {
-		assertThat(YMFileDirectory.createFromDir(dir.getRoot().getPath()))
-			.isInstanceOf(YMFileDirectory.class);
+		assertThat(SrcDirectory.createFromDir(dir.getRoot().getPath()))
+			.isInstanceOf(SrcDirectory.class);
 	}
 	
 	@Test
 	public void testCreateFromDirWithInvalidPath() throws NotDirectoryException {
-		assertThatThrownBy(() -> YMFileDirectory.createFromDir(INVALID_PATH))
+		assertThatThrownBy(() -> SrcDirectory.createFromDir(INVALID_PATH))
 			.isInstanceOf(NotDirectoryException.class)
 			.hasMessage(INVALID_PATH);
 	}
@@ -56,9 +56,9 @@ public class YMFileDirectoryTest {
 				  						  .map(YMFile::getPath)
 				  						  .collect(Collectors.toList());
 		
-		YMFileDirectory testDir = null;
+		SrcDirectory testDir = null;
 		try {
-			testDir = YMFileDirectory.createFromDir(dir.getRoot().getPath());
+			testDir = SrcDirectory.createFromDir(dir.getRoot().getPath());
 		} catch (NotDirectoryException e) {
 			System.err.println("Error creating temporary test directory.");
 		}

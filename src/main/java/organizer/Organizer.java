@@ -18,7 +18,7 @@ import dirchooser.DirChooser;
  */
 public final class Organizer {
 
-	private YMFileDirectory srcDir;
+	private SrcDirectory srcDir;
 	private YMDirectory destDir;
 
 	/**
