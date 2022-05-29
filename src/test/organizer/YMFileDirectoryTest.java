@@ -53,8 +53,8 @@ public class YMFileDirectoryTest {
 	@Test
 	public void testGetFiles() {
 		List<String> filePaths = testFiles.parallelStream()
-				  .map(YMFile::getPath)
-				  .collect(Collectors.toList());
+				  						  .map(YMFile::getPath)
+				  						  .collect(Collectors.toList());
 		
 		YMFileDirectory testDir = null;
 		try {
