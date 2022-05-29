@@ -4,29 +4,25 @@ import java.io.File;
 import java.nio.file.NotDirectoryException;
 
 /**
- * Abstract class that serves the purpose of extracting the common parts
- * of {@link OFileDirectory} and {@link StoreDirectory}.<br>
- * It generalises the concept of directory in the project,
- * having a field that stores it and a constructor to initialise it.
- * 
- * @author raflat
+ * Abstract class that serves the purpose of extracting the common parts of
+ * {@link YMFileDirectory} and {@link YMDirectory}.<br>
+ * It generalizes the concept of directory in the project.
  */
-abstract class ODirectory {
+abstract class Directory {
 
 	/**
-	 * Field that represents the directory that defines the class.
+	 * Field that represents the directory to which the class refers.
 	 */
 	final File dir;
 	
 	/**
-	 * Constructor that initialises the field {@link #dir}.
+	 * Constructor that initializes the field {@link #dir}.
 	 * 
 	 * @param dirPath - Path to a directory.
-	 * @throws 
-	 * NotDirectoryException if the path provided leads to a resource
+	 * @throws NotDirectoryException If the path provided leads to a resource
 	 * that isn't a directory.
 	 */
-	ODirectory(String dirPath) throws NotDirectoryException {
+	Directory(String dirPath) throws NotDirectoryException {
 		File resource = new File(dirPath);
 		
 		if (!resource.isDirectory())
