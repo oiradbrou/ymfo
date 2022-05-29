@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Once initialized, the class creates a {@link YMFile} for each of the files
  * it contains.
  */
-final class YMFileDirectory extends ODirectory {
+final class YMFileDirectory extends Directory {
 
 	/**
 	 * Static factory method that creates and returns a {@link YMFileDirectory}

@@ -18,7 +18,7 @@ import java.util.LinkedList;
  * 
  * @author raflat
  */
-final class YMDirectory extends ODirectory {
+final class YMDirectory extends Directory {
 
 	/**
 	 * <p>Static factory method that creates and returns a new {@link YMDirectory}
