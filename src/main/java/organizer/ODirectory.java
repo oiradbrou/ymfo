@@ -5,7 +5,7 @@ import java.nio.file.NotDirectoryException;
 
 /**
  * Abstract class that serves the purpose of extracting the common parts of
- * {@link YMFileDirectory} and {@link YMDirectory}.<br>
+ * {@link SrcDirectory} and {@link YMDirectory}.<br>
  * It generalizes the concept of directory in the project.
  */
 abstract class Directory {
