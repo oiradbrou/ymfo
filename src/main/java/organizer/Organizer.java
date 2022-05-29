@@ -57,20 +57,7 @@ public final class Organizer {
 	 * {@link OFileDirectory} by renaming them to their new location.
 	 */
 	public void renameFiles() {
-		LinkedList<String> alreadyPresentDates = destDir.containedDates();
-
-		for (YMFile image : srcDir.getFiles()) {
-			String imageYear = image.extractYear();
-			String imageMonth = image.extractMonth();
-			String imageName = imageYear + "-" + imageMonth;
-
-			if (!alreadyPresentDates.contains(imageName))
-				destDir.createDirectory(imageYear, imageMonth);
-
-			imageName += "_" + destDir.lastImageNumber(imageYear, imageMonth);
-
-			destDir.storeFile(image);
-		}
+		srcDir.getFiles().forEach(destDir::storeFile);
 	}
 
 }
