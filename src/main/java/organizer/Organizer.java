@@ -1,7 +1,6 @@
 package organizer;
 
 import java.nio.file.NotDirectoryException;
-import java.util.LinkedList;
 
 import dirchooser.DirChooser;
 
