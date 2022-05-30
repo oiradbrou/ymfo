@@ -40,7 +40,7 @@ public final class DirChooser extends JFrame implements ActionListener {
 		Object pressedButton = e.getSource();
 		
 		if (pressedButton == runButton)
-			organizer.renameFiles();
+			organizer.organize();
 		else {
 			JFileChooser dirChooser = new JFileChooser();
 			dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);

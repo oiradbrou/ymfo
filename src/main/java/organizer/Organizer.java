@@ -55,7 +55,7 @@ public final class Organizer {
 	 * Method that organizes the files contained in the source
 	 * {@link OFileDirectory} by renaming them to their new location.
 	 */
-	public void renameFiles() {
+	public void organize() {
 		srcDir.getFiles().forEach(destDir::storeFile);
 	}
 
