@@ -5,13 +5,9 @@ import java.nio.file.NotDirectoryException;
 import dirchooser.DirChooser;
 
 /**
- * Class that organizes the files from the source {@link OFileDirectory}
- * in the destination {@link StoreDirectory}.<br>
- * The files are organized in two level of directories: a first one
- * consisting of directories denoting the year of the file, the
- * second one composed of directories indicating the month of the file.
- * Furthermore, the files are enumerated from 0 to n, according to how many
- * of them are contained in the directory.
+ * Class that organizes the files from the source {@link SrcDirectory} in the
+ * destination {@link YMDirectory}. The files are organized in the year/month
+ * structure of the destination folder.
  */
 public final class Organizer {
 
@@ -19,8 +15,8 @@ public final class Organizer {
 	private YMDirectory destDir;
 
 	/**
-	 * Method that runs the {@link Organizer} by launching the
-	 * directory selection module.
+	 * Method that runs the {@link Organizer} by creating an instance of it and
+	 * starting the directory selection module.
 	 */
 	public static void run() {
 		Organizer organizer = new Organizer();
@@ -28,32 +24,33 @@ public final class Organizer {
 	}
 
 	/**
-	 * Setter to set the source {@link OFileDirectory} from which
-	 * the files to organize are taken, given the path to a
-	 * directory.
+	 * Setter of the {@link SrcDirectory} from which the files to organize are 
+	 * taken.
 	 *
 	 * @param srcDirPath - Path to a directory.
-	 * @throws NotDirectoryException
+	 * @throws NotDirectoryException - If the path provided leads to a resource
+	 * that isn't a directory.
 	 */
 	public void setSrcDir(String srcDirPath) throws NotDirectoryException {
 		srcDir = SrcDirectory.createFromDir(srcDirPath);
 	}
 
 	/**
-	 * Setter to set the destination {@link StoreDirectory} to which
-	 * the files to organize are stored, given the path to a
-	 * directory.
+	 * Setter of the destination {@link YMDirectory} where the organized files
+	 * are stored.
 	 *
 	 * @param destDirPath - Path to a directory.
-	 * @throws NotDirectoryException 
+	 * @throws NotDirectoryException - If the path provided leads to a resource
+	 * that isn't a directory.
 	 */
 	public void setDestDir(String destDirPath) throws NotDirectoryException {
 		destDir = YMDirectory.createFromDir(destDirPath);
 	}
 
 	/**
-	 * Method that organizes the files contained in the source
-	 * {@link OFileDirectory} by renaming them to their new location.
+	 * Method that organizes the files contained in the {@link SrcDirectory}
+	 * by storing them into the {@link YMDirectory}. This means that the files
+	 * are organized according to the structure of the destination directory.
 	 */
 	public void organize() {
 		srcDir.getFiles().forEach(destDir::storeFile);
