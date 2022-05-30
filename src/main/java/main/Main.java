@@ -2,6 +2,9 @@ package main;
 
 import organizer.YMOrganizer;
 
+/**
+ * Class that only contains the main method.
+ */
 public class Main {
 
 	/**
