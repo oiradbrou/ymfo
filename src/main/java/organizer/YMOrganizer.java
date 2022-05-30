@@ -1,6 +1,7 @@
 package organizer;
 
 import java.nio.file.NotDirectoryException;
+import java.util.LinkedList;
 
 import dirchooser.DirChooser;
 
@@ -53,7 +54,17 @@ public final class YMOrganizer {
 	 * are organized according to the structure of the destination directory.
 	 */
 	public void organize() {
-		srcDir.getFiles().forEach(destDir::storeFile);
+		LinkedList<String> alreadyPresentDates = destDir.containedDates();
+
+		for (YMFile image : srcDir.getFiles()) {
+			String imageYear = image.extractYear();
+			String imageMonth = image.extractMonth();
+			String imageName = imageYear + "-" + imageMonth;
+			if (!alreadyPresentDates.contains(imageName))
+				destDir.createDirectory(imageYear, imageMonth);
+			imageName += "_" + destDir.lastImageNumber(imageYear, imageMonth);
+			destDir.storeFile(image);
+		}
 	}
 
 }
