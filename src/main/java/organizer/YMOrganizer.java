@@ -9,7 +9,7 @@ import dirchooser.DirChooser;
  * destination {@link YMDirectory}. The files are organized in the year/month
  * structure of the destination folder.
  */
-public final class Organizer {
+public final class YMOrganizer {
 
 	private SrcDirectory srcDir;
 	private YMDirectory destDir;
@@ -19,7 +19,7 @@ public final class Organizer {
 	 * starting the directory selection module.
 	 */
 	public static void run() {
-		Organizer organizer = new Organizer();
+		YMOrganizer organizer = new YMOrganizer();
 		DirChooser.chooseAndOrganizeWith(organizer);
 	}
 

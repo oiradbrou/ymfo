@@ -1,6 +1,6 @@
 package main;
 
-import organizer.Organizer;
+import organizer.YMOrganizer;
 
 public class Main {
 
@@ -8,7 +8,7 @@ public class Main {
 	 * Main method, used just to start the program. 
 	 */
 	public static final void main(String args[]) {
-		Organizer.run();
+		YMOrganizer.run();
 	}
 	
 }

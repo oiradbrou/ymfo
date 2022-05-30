@@ -11,7 +11,7 @@ import java.nio.file.NotDirectoryException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 
-import organizer.Organizer;
+import organizer.YMOrganizer;
 
 public final class DirChooser extends JFrame implements ActionListener {
 
@@ -29,9 +29,9 @@ public final class DirChooser extends JFrame implements ActionListener {
 	private RButton destButton;
 	private RButton runButton;
 	
-	private Organizer organizer;
+	private YMOrganizer organizer;
 	
-	public static DirChooser chooseAndOrganizeWith(Organizer organizer) {
+	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
 		return new DirChooser(organizer);
 	}
 	
@@ -68,7 +68,7 @@ public final class DirChooser extends JFrame implements ActionListener {
 		}
 	}
 	
-	private DirChooser(Organizer organizer) {
+	private DirChooser(YMOrganizer organizer) {
 		this.organizer = organizer;
 		initComponents();
 	}
