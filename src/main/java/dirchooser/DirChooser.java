@@ -17,17 +17,17 @@ public final class DirChooser extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 		
-	private RPanel panel;
+	private Panel panel;
 
-	private RLabel srcLabel;
-	private RLabel destLabel;
+	private Label srcLabel;
+	private Label destLabel;
 	
-	private RTextField srcTextField;
-	private RTextField destTextField;
+	private TextField srcTextField;
+	private TextField destTextField;
 	
-	private RButton srcButton;
-	private RButton destButton;
-	private RButton runButton;
+	private Button srcButton;
+	private Button destButton;
+	private Button runButton;
 	
 	private YMOrganizer organizer;
 	
@@ -126,7 +126,7 @@ public final class DirChooser extends JFrame implements ActionListener {
 	}
 	
 	private void initLabels() {
-		srcLabel = RLabel.withText("Source folder:");
+		srcLabel = Label.withText("Source folder:");
 		srcLabel.configure();
 		
 		destLabel = RLabel.withText("Destination folder:");

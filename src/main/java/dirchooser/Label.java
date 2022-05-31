@@ -4,12 +4,12 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-public final class CLabel extends JLabel implements Configurable {
+public final class Label extends JLabel implements Configurable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static CLabel withText(String text) {
-		return new CLabel(text);
+	public static Label withText(String text) {
+		return new Label(text);
 	}
 
 	@Override
@@ -17,7 +17,7 @@ public final class CLabel extends JLabel implements Configurable {
 		setForeground(Color.decode(iniFile.readFrom("Label", "TextColor")));		
 	}
 	
-	private CLabel(String text) {
+	private Label(String text) {
 		super(text);
 	}
 

@@ -5,12 +5,12 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-public final class CPanel extends JPanel implements Configurable {
+public final class Panel extends JPanel implements Configurable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static CPanel create() {
-		return new CPanel();
+	public static Panel create() {
+		return new Panel();
 	}
 	
 	@Override
@@ -19,6 +19,6 @@ public final class CPanel extends JPanel implements Configurable {
 		setBackground(Color.decode(iniFile.readFrom("Panel", "Color")));
 	}
 	
-	private CPanel() {}
+	private Panel() {}
 	
 }
