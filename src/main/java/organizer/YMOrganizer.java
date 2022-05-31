@@ -16,7 +16,7 @@ public final class YMOrganizer {
 	private YMDirectory destDir;
 
 	/**
-	 * Method that runs the {@link Organizer} by creating an instance of it and
+	 * Method that runs the {@link YMOrganizer} by creating an instance of it and
 	 * starting the directory selection module.
 	 */
 	public static void run() {
@@ -25,7 +25,7 @@ public final class YMOrganizer {
 	}
 
 	/**
-	 * Setter of the {@link SrcDirectory} from which the files to organize are 
+	 * Setter of the {@link SrcDirectory} from which the files to organize are
 	 * taken.
 	 *
 	 * @param srcDirPath - Path to a directory.
