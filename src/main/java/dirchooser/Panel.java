@@ -5,11 +5,11 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-public final class Panel extends JPanel implements Configurable {
+final class Panel extends JPanel implements Configurable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static Panel create() {
+	static Panel create() {
 		return new Panel();
 	}
 	

@@ -15,11 +15,11 @@ final class CIni extends Ini {
 
 	private static Ini file;
 
-	public static CIni createFromIni(String iniFilePath) {
+	static CIni createFromIni(String iniFilePath) {
 		return new CIni(iniFilePath);
 	}
 	
-	public String readFrom(String sectionName, String fieldName) {
+	String readFrom(String sectionName, String fieldName) {
 		return file.get(sectionName, fieldName);
 	}
 	

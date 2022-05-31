@@ -2,11 +2,11 @@ package dirchooser;
 
 import javax.swing.JTextField;
 
-public final class TextField extends JTextField implements Configurable {
+final class TextField extends JTextField implements Configurable {
 
 	private static final long serialVersionUID = 1L;
 	
-	public static TextField create() {
+	static TextField create() {
 		return new TextField();
 	}
 	

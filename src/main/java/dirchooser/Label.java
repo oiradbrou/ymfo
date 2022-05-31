@@ -4,11 +4,11 @@ import java.awt.Color;
 
 import javax.swing.JLabel;
 
-public final class Label extends JLabel implements Configurable {
+final class Label extends JLabel implements Configurable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static Label withText(String text) {
+	static Label withText(String text) {
 		return new Label(text);
 	}
 
