@@ -13,32 +13,32 @@ import javax.swing.JFrame;
 
 import organizer.YMOrganizer;
 
-public final class DirChooser extends JFrame implements ActionListener {
+public final class DirChooser extends JFrame implements ActionListener, Configurable {
 
 	private static final long serialVersionUID = 1L;
-		
+
 	private Panel panel;
 
 	private Label srcLabel;
 	private Label destLabel;
-	
+
 	private TextField srcTextField;
 	private TextField destTextField;
-	
+
 	private Button srcButton;
 	private Button destButton;
 	private Button runButton;
-	
+
 	private YMOrganizer organizer;
-	
+
 	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
 		return new DirChooser(organizer);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object pressedButton = e.getSource();
-		
+
 		if (pressedButton == runButton)
 			organizer.organize();
 		else {
@@ -67,19 +67,75 @@ public final class DirChooser extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
+
+	@Override
+	public void configure(CIni iniFile) {
+		add(panel);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle(iniFile.readFrom("Frame", "Title"));
+
+		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
+		setIconImage(icon);
+	}
+
 	private DirChooser(YMOrganizer organizer) {
 		this.organizer = organizer;
-		initComponents();
-	}
-	
-	private void initComponents () {
-		initPanel();
 		initFrame();
+	}
+
+	private void initFrame() {
+		initPanel();
 		initLabels();
-	  	initTextFields();
-	  	initButtons();
-		
+		initTextFields();
+		initButtons();
+
+		CIni iniFile = CIni.createFromIni("src\\main\\resources\\conf.ini");
+		customizeComponents(iniFile);
+
+		attachComponents();
+
+		this.pack();
+		this.setVisible(true);
+	}
+
+	private void initPanel() {
+		panel = Panel.create();
+	}
+
+	private void initLabels() {
+		srcLabel = Label.withText("Source folder:");
+		destLabel = Label.withText("Destination folder:");
+	}
+
+	private void initTextFields() {
+		srcTextField = TextField.create();
+	  	destTextField = TextField.create();
+	}
+
+	private void initButtons() {
+		srcButton = Button.withText("Browse");
+		srcButton.addActionListener(this);
+
+		destButton = Button.withText("Browse");
+		destButton.addActionListener(this);
+
+		runButton = Button.withText("Run");
+		runButton.addActionListener(this);
+	}
+
+	private void customizeComponents(CIni iniFile) {
+		panel.configure(iniFile);
+		this.configure(iniFile);
+		srcLabel.configure(iniFile);
+		destLabel.configure(iniFile);
+		srcTextField.configure(iniFile);
+		destTextField.configure(iniFile);
+		srcButton.configure(iniFile);
+		destButton.configure(iniFile);
+		runButton.configure(iniFile);
+	}
+
+	private void attachComponents() {
 		GridBagConstraints  contrains = new GridBagConstraints();
 		contrains.insets = new Insets(10, 10, 10, 10);
 		contrains.gridx = 0;
@@ -104,55 +160,6 @@ public final class DirChooser extends JFrame implements ActionListener {
 		contrains.gridy = 3;
 		contrains.fill = GridBagConstraints.HORIZONTAL;
 		panel.add(runButton, contrains);
-		
-		this.pack();
-		this.setVisible(true);
 	}
-	
-	private void initPanel() {
-		panel = RPanel.create();
-		panel.configure();
-	}
-	
-	private void initFrame() {
-		RIni ini = RIni.create();
-		
-		add(panel);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle(ini.readFrom("Frame", "Title"));
-		
-		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
-		setIconImage(icon);
-	}
-	
-	private void initLabels() {
-		srcLabel = Label.withText("Source folder:");
-		srcLabel.configure();
-		
-		destLabel = RLabel.withText("Destination folder:");
-		destLabel.configure();
-	}
-	
-	private void initTextFields() {
-		srcTextField = RTextField.create();
-	  	srcTextField.configure();
-	  	
-	  	destTextField = RTextField.create();
-	  	destTextField.configure();
-	}
-	
-	private void initButtons() {
-		srcButton = RButton.withText("Browse");
-		srcButton.configure();
-		srcButton.addActionListener(this);
-	
-		destButton = RButton.withText("Browse");
-		destButton.configure();
-		destButton.addActionListener(this);
-		
-		runButton = RButton.withText("Run");
-		runButton.configure();
-		runButton.addActionListener(this);
-	}
-		
+
 }
