@@ -11,7 +11,7 @@ public final class RTextField extends TextField {
 	}
 
 	public void configure() {
-		RIni ini = RIni.create();
+		CIni ini = RIni.create();
 				
 		setColumns(Integer.parseInt(ini.readFrom("TextField", "Length")));
 		setEditable(false);
