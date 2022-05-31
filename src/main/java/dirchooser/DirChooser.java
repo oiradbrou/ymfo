@@ -130,17 +130,17 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 
 	private void attachComponents() {
 		contrains.insets = new Insets(10, 10, 10, 10);
-		addXYConstrained(0, 0, srcLabel);
-		addXYConstrained(1, 0, srcTextField);
-		addXYConstrained(2, 0, srcButton);
-		addXYConstrained(0, 1, destLabel);
-		addXYConstrained(1, 1, destTextField);
-		addXYConstrained(2, 1, destButton);
+		addToPanelXYConstrained(0, 0, srcLabel);
+		addToPanelXYConstrained(1, 0, srcTextField);
+		addToPanelXYConstrained(2, 0, srcButton);
+		addToPanelXYConstrained(0, 1, destLabel);
+		addToPanelXYConstrained(1, 1, destTextField);
+		addToPanelXYConstrained(2, 1, destButton);
 		contrains.fill = GridBagConstraints.HORIZONTAL;
-		addXYConstrained(1, 3, runButton);
+		addToPanelXYConstrained(1, 3, runButton);
 	}
 	
-	private void addXYConstrained(int gridX, int gridY, Component component) {
+	private void addToPanelXYConstrained(int gridX, int gridY, Component component) {
 		contrains.gridx = gridX;
 		contrains.gridy = gridY;
 		panel.add(component, contrains);
