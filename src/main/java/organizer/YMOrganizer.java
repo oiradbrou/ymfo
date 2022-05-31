@@ -60,9 +60,10 @@ public final class YMOrganizer {
 			String imageYear = image.extractYear();
 			String imageMonth = image.extractMonth();
 			String imageName = imageYear + "-" + imageMonth;
+			
 			if (!alreadyPresentDates.contains(imageName))
 				destDir.createDirectory(imageYear, imageMonth);
-			imageName += "_" + destDir.lastImageNumber(imageYear, imageMonth);
+			
 			destDir.storeFile(image);
 		}
 	}
