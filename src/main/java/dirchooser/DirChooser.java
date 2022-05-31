@@ -1,5 +1,6 @@
 package dirchooser;
 
+import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
 import java.awt.Insets;
@@ -13,32 +14,34 @@ import javax.swing.JFrame;
 
 import organizer.YMOrganizer;
 
-public final class DirChooser extends JFrame implements ActionListener {
+public final class DirChooser extends JFrame implements ActionListener, Configurable {
 
 	private static final long serialVersionUID = 1L;
-		
-	private RPanel panel;
 
-	private RLabel srcLabel;
-	private RLabel destLabel;
+	private Panel panel;
+
+	private Label srcLabel;
+	private Label destLabel;
+
+	private TextField srcTextField;
+	private TextField destTextField;
+
+	private Button srcButton;
+	private Button destButton;
+	private Button runButton;
+
+	private final YMOrganizer organizer;
 	
-	private RTextField srcTextField;
-	private RTextField destTextField;
-	
-	private RButton srcButton;
-	private RButton destButton;
-	private RButton runButton;
-	
-	private YMOrganizer organizer;
-	
+	GridBagConstraints  contrains = new GridBagConstraints();
+
 	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
 		return new DirChooser(organizer);
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object pressedButton = e.getSource();
-		
+
 		if (pressedButton == runButton)
 			organizer.organize();
 		else {
@@ -67,92 +70,80 @@ public final class DirChooser extends JFrame implements ActionListener {
 			}
 		}
 	}
-	
+
+	@Override
+	public void configure(CIni iniFile) {
+		add(panel);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setTitle(iniFile.readFrom("Frame", "Title"));
+
+		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
+		setIconImage(icon);
+	}
+
 	private DirChooser(YMOrganizer organizer) {
 		this.organizer = organizer;
-		initComponents();
-	}
-	
-	private void initComponents () {
-		initPanel();
 		initFrame();
-		initLabels();
-	  	initTextFields();
-	  	initButtons();
-		
-		GridBagConstraints  contrains = new GridBagConstraints();
-		contrains.insets = new Insets(10, 10, 10, 10);
-		contrains.gridx = 0;
-		contrains.gridy = 0;
-		panel.add(srcLabel, contrains);
-		contrains.gridx = 1;
-		contrains.gridy = 0;
-		panel.add(srcTextField, contrains);
-		contrains.gridx = 2;
-		contrains.gridy = 0;
-		panel.add(srcButton, contrains);
-		contrains.gridx = 0;
-		contrains.gridy = 1;
-		panel.add(destLabel, contrains);
-		contrains.gridx = 1;
-		contrains.gridy = 1;
-		panel.add(destTextField, contrains);
-		contrains.gridx = 2;
-		contrains.gridy = 1;
-		panel.add(destButton, contrains);
-		contrains.gridx = 1;
-		contrains.gridy = 3;
-		contrains.fill = GridBagConstraints.HORIZONTAL;
-		panel.add(runButton, contrains);
-		
+	}
+
+	private void initFrame() {
+		createComponents();
+		addButtonsToActionListener();
+
+		CIni iniFile = CIni.createFromIni("src\\main\\resources\\conf.ini");
+		customizeComponents(iniFile);
+
+		attachComponents();
+
 		this.pack();
 		this.setVisible(true);
 	}
 	
-	private void initPanel() {
-		panel = RPanel.create();
-		panel.configure();
+	private void createComponents() {
+		panel = Panel.create();
+		srcLabel = Label.withText("Source folder:");
+		destLabel = Label.withText("Destination folder:");
+		srcTextField = TextField.create();
+	  	destTextField = TextField.create();
+	  	srcButton = Button.withText("Browse");
+		destButton = Button.withText("Browse");
+		runButton = Button.withText("Run");
 	}
-	
-	private void initFrame() {
-		RIni ini = RIni.create();
-		
-		add(panel);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle(ini.readFrom("Frame", "Title"));
-		
-		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
-		setIconImage(icon);
-	}
-	
-	private void initLabels() {
-		srcLabel = RLabel.withText("Source folder:");
-		srcLabel.configure();
-		
-		destLabel = RLabel.withText("Destination folder:");
-		destLabel.configure();
-	}
-	
-	private void initTextFields() {
-		srcTextField = RTextField.create();
-	  	srcTextField.configure();
-	  	
-	  	destTextField = RTextField.create();
-	  	destTextField.configure();
-	}
-	
-	private void initButtons() {
-		srcButton = RButton.withText("Browse");
-		srcButton.configure();
+
+	private void addButtonsToActionListener() {
 		srcButton.addActionListener(this);
-	
-		destButton = RButton.withText("Browse");
-		destButton.configure();
 		destButton.addActionListener(this);
-		
-		runButton = RButton.withText("Run");
-		runButton.configure();
 		runButton.addActionListener(this);
 	}
-		
+
+	private void customizeComponents(CIni iniFile) {
+		panel.configure(iniFile);
+		this.configure(iniFile);
+		srcLabel.configure(iniFile);
+		destLabel.configure(iniFile);
+		srcTextField.configure(iniFile);
+		destTextField.configure(iniFile);
+		srcButton.configure(iniFile);
+		destButton.configure(iniFile);
+		runButton.configure(iniFile);
+	}
+
+	private void attachComponents() {
+		contrains.insets = new Insets(10, 10, 10, 10);
+		addToPanelXYConstrained(0, 0, srcLabel);
+		addToPanelXYConstrained(1, 0, srcTextField);
+		addToPanelXYConstrained(2, 0, srcButton);
+		addToPanelXYConstrained(0, 1, destLabel);
+		addToPanelXYConstrained(1, 1, destTextField);
+		addToPanelXYConstrained(2, 1, destButton);
+		contrains.fill = GridBagConstraints.HORIZONTAL;
+		addToPanelXYConstrained(1, 3, runButton);
+	}
+	
+	private void addToPanelXYConstrained(int gridX, int gridY, Component component) {
+		contrains.gridx = gridX;
+		contrains.gridy = gridY;
+		panel.add(component, contrains);
+	}
+
 }
