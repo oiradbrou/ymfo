@@ -12,9 +12,7 @@ public final class RButton extends JButton {
 		return new RButton(text);
 	}
 	
-	public void configure() {
-		RIni ini = RIni.create();
-		
+	public void configure() {		
 		setBackground(Color.decode(ini.readFrom("Button", "BackgroundColor")));
 		setForeground(Color.decode(ini.readFrom("Label", "TextColor")));
 		setFocusable(false);

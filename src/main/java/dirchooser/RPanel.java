@@ -5,21 +5,20 @@ import java.awt.GridBagLayout;
 
 import javax.swing.JPanel;
 
-public final class RPanel extends JPanel {
+public final class CPanel extends JPanel implements Configurable {
 
 	private static final long serialVersionUID = 1L;
 
-	public static RPanel create() {
-		return new RPanel();
+	public static CPanel create() {
+		return new CPanel();
 	}
 	
-	public void configure() {
-		RIni ini = RIni.create();
-		
+	@Override
+	public void configure(CIni iniFile) {		
 		setLayout(new GridBagLayout());
-		setBackground(Color.decode(ini.readFrom("Panel", "Color")));
+		setBackground(Color.decode(iniFile.readFrom("Panel", "Color")));
 	}
 	
-	private RPanel() {}
+	private CPanel() {}
 	
 }

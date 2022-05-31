@@ -1,8 +1,8 @@
 package dirchooser;
 
-import java.awt.TextField;
+import javax.swing.JTextField;
 
-public final class RTextField extends TextField {
+public final class RTextField extends JTextField {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -11,7 +11,7 @@ public final class RTextField extends TextField {
 	}
 
 	public void configure() {
-		CIni ini = RIni.create();
+		CIni ini = CIni.create();
 				
 		setColumns(Integer.parseInt(ini.readFrom("TextField", "Length")));
 		setEditable(false);
