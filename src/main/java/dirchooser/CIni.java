@@ -26,8 +26,9 @@ final class CIni extends Ini {
 	private CIni(String iniFilePath) {
 		try {
 			file = new Ini(new File(iniFilePath));
-			//file = new Ini(new File("src\\main\\resources\\conf.ini"));
-		} catch (IOException e) {}
+		} catch (IOException e) {
+			System.err.println("Error trying to open the ini file.");
+		}
 	}
 	
 }
