@@ -8,9 +8,6 @@ import javax.swing.JButton;
  * Class that extends the {@link JButton} type by providing it with a method to
  * configure it according to a {@link CIni} configuration file; this method is
  * provided by the interface {@link Configurable}.
- *
- * @author Dario
- *
  */
 final class Button extends JButton implements Configurable {
 
