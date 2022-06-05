@@ -33,6 +33,4 @@ final class Panel extends JPanel implements Configurable {
 		setBackground(Color.decode(iniFile.readFrom("Panel", "Color")));
 	}
 	
-	private Panel() {}
-	
 }
