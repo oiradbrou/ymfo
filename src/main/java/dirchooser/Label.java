@@ -8,9 +8,6 @@ import javax.swing.JLabel;
  * Class that extends the {@link JLabel} type by providing it with a method to
  * configure it according to a {@link CIni} configuration file; this method is
  * provided by the interface {@link Configurable}.
- *
- * @author Dario
- *
  */
 final class Label extends JLabel implements Configurable {
 
