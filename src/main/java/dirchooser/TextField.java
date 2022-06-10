@@ -31,6 +31,4 @@ final class TextField extends JTextField implements Configurable {
 		setFocusable(false);
 	}
 	
-	private TextField() {}
-	
 }
