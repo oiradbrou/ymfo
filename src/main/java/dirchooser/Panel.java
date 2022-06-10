@@ -22,15 +22,15 @@ final class Panel extends JPanel implements Configurable {
 	static Panel create() {
 		return new Panel();
 	}
-	
+
 	/**
 	 * Method that configures the instance of {@link Panel} is called on. The
 	 * configuration is taken from the {@link CIni} file provided.
 	 */
 	@Override
-	public void configure(CIni iniFile) {		
+	public void configure(CIni iniFile) {
 		setLayout(new GridBagLayout());
 		setBackground(Color.decode(iniFile.readFrom("Panel", "Color")));
 	}
-	
+
 }

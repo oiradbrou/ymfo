@@ -31,7 +31,7 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 	private Button runButton;
 
 	private final YMOrganizer organizer;
-	
+
 	GridBagConstraints  contrains = new GridBagConstraints();
 
 	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
@@ -98,7 +98,7 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 		this.pack();
 		this.setVisible(true);
 	}
-	
+
 	private void createComponents() {
 		panel = Panel.create();
 		srcLabel = Label.withText("Source folder:");
@@ -139,7 +139,7 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 		contrains.fill = GridBagConstraints.HORIZONTAL;
 		addToPanelXYConstrained(1, 3, runButton);
 	}
-	
+
 	private void addToPanelXYConstrained(int gridX, int gridY, Component component) {
 		contrains.gridx = gridX;
 		contrains.gridy = gridY;

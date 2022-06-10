@@ -30,9 +30,9 @@ final class Label extends JLabel implements Configurable {
 	 */
 	@Override
 	public void configure(CIni iniFile) {
-		setForeground(Color.decode(iniFile.readFrom("Label", "TextColor")));		
+		setForeground(Color.decode(iniFile.readFrom("Label", "TextColor")));
 	}
-	
+
 	private Label(String text) {
 		super(text);
 	}

@@ -10,7 +10,7 @@ import javax.swing.JTextField;
 final class TextField extends JTextField implements Configurable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * Static factory method to create a {@link TextField} object.
 	 *
@@ -19,7 +19,7 @@ final class TextField extends JTextField implements Configurable {
 	static TextField create() {
 		return new TextField();
 	}
-	
+
 	/**
 	 * Method that configures the instance of {@link TextField} is called on.
 	 * The configuration is taken from the {@link CIni} file provided.
@@ -30,5 +30,5 @@ final class TextField extends JTextField implements Configurable {
 		setEditable(false);
 		setFocusable(false);
 	}
-	
+
 }
