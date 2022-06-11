@@ -51,22 +51,7 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 			if (dirChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 				String choosedDirPath = dirChooser.getSelectedFile().getAbsolutePath();
 
-				if (pressedButton == srcButton) {
-					try {
-						organizer.setSrcDir(choosedDirPath);
-					} catch (NotDirectoryException e1) {
-						e1.printStackTrace();
-					}
-					srcTextField.setText(choosedDirPath);
-				}
-				else if (pressedButton == destButton) {
-					try {
-						organizer.setDestDir(choosedDirPath);
-					} catch (NotDirectoryException e1) {
-						e1.printStackTrace();
-					}
-					destTextField.setText(choosedDirPath);
-				}
+				checkPressedDirButtons(pressedButton, choosedDirPath);
 			}
 		}
 	}
@@ -79,6 +64,25 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 
 		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
 		setIconImage(icon);
+	}
+
+
+	private void checkPressedDirButtons(Object pressedButton, String choosedDirPath) {
+		if (pressedButton == srcButton) {
+			try {
+				organizer.setSrcDir(choosedDirPath);
+			} catch (NotDirectoryException e1) {
+				e1.printStackTrace();
+			}
+			srcTextField.setText(choosedDirPath);
+		} else if (pressedButton == destButton) {
+			try {
+				organizer.setDestDir(choosedDirPath);
+			} catch (NotDirectoryException e1) {
+				e1.printStackTrace();
+			}
+			destTextField.setText(choosedDirPath);
+		}
 	}
 
 	private DirChooser(YMOrganizer organizer) {
@@ -130,6 +134,7 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 
 	private void attachComponents() {
 		contrains.insets = new Insets(10, 10, 10, 10);
+
 		addToPanelXYConstrained(0, 0, srcLabel);
 		addToPanelXYConstrained(1, 0, srcTextField);
 		addToPanelXYConstrained(2, 0, srcButton);
