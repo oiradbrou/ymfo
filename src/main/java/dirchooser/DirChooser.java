@@ -19,20 +19,13 @@ public final class DirChooser extends JFrame implements ActionListener, Configur
 	private static final long serialVersionUID = 1L;
 
 	private Panel panel;
-
-	private Label srcLabel;
-	private Label destLabel;
-
-	private TextField srcTextField;
-	private TextField destTextField;
-
-	private Button srcButton;
-	private Button destButton;
-	private Button runButton;
+	private Label srcLabel, destLabel;
+	private TextField srcTextField, destTextField;
+	private Button srcButton, destButton, runButton;
+	
+	GridBagConstraints  contrains = new GridBagConstraints();
 
 	private final YMOrganizer organizer;
-
-	GridBagConstraints  contrains = new GridBagConstraints();
 
 	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
 		return new DirChooser(organizer);
