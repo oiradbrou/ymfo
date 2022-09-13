@@ -11,6 +11,8 @@ import java.nio.file.NotDirectoryException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
 
 import organizer.YMOrganizer;
 
@@ -69,6 +71,14 @@ public final class DirChooser extends JFrame implements ActionListener {
 
 	private DirChooser(YMOrganizer organizer) {
 		this.organizer = organizer;
+		
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
+				| UnsupportedLookAndFeelException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		initFrame();
 	}
