@@ -7,7 +7,7 @@ import javax.swing.JTextField;
  * Extension of a {@link JPanel} that allows the creation of an instance with default length, nor editable and
  * nor focusable.
  */
-final class TextField extends JTextField implements Component{
+final class TextField extends JTextField {
 
 	/**
 	 * Default serial version ID to avoid warnings.
