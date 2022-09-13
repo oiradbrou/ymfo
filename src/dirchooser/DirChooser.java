@@ -1,5 +1,6 @@
 package dirchooser;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.GridBagConstraints;
 import java.awt.Image;
@@ -70,7 +71,9 @@ public final class DirChooser extends JFrame implements ActionListener {
 	}
 
 	private DirChooser(YMOrganizer organizer) {
-		this.organizer = organizer;
+		this.organizer = organizer;		
+		
+		initFrame();
 		
 		try {
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
@@ -80,7 +83,6 @@ public final class DirChooser extends JFrame implements ActionListener {
 			e.printStackTrace();
 		}
 		
-		initFrame();
 	}
 
 	private void initFrame() {
