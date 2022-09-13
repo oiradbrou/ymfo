@@ -1,29 +1,35 @@
 package dirchooser;
 
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * Class that extends the {@link JTextField} type by providing it with a method
- * to configure it according to a {@link CIni} configuration file; this method
- * is provided by the interface {@link Configurable}.
+ * Extension of a {@link JPanel} that allows the creation of an instance with default length, nor editable and
+ * nor focusable.
  */
-final class TextField extends JTextField{
+final class TextField extends JTextField implements Component{
 
+	/**
+	 * Default serial version ID to avoid warnings.
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Static factory method to create a {@link TextField} object.
+	 * Returns a new {@link TextField} object with twenty columns, not editable and not focusable.
+	 */
+	private TextField() {
+		setColumns(Integer.parseInt("20"));
+		setEditable(false);
+		setFocusable(false);
+	}
+
+	/**
+	 * Create a new {@link TextField} object.
 	 *
 	 * @return New TextField instance.
 	 */
 	static TextField create() {
 		return new TextField();
-	}
-	
-	private TextField() {
-		setColumns(Integer.parseInt("20"));
-		setEditable(false);
-		setFocusable(false);
 	}
 
 }

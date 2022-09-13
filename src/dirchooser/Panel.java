@@ -6,26 +6,33 @@ import java.awt.GridBagLayout;
 import javax.swing.JPanel;
 
 /**
- * Class that extends the {@link JPanel} type by providing it with a method to
- * configure it according to a {@link CIni} configuration file; this method is
- * provided by the interface {@link Configurable}.
+ * Extension of a {@link JPanel} that allows the creation of an instance with a default colored background and
+ * {@link GridBagLayout} layout.
  */
 final class Panel extends JPanel {
 
+	/**
+	 * Default serial version ID to avoid warnings.
+	 */
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Static factory method to create a {@link Panel} object.
+	 * Returns a new {@link Panel} object with dark grey background and {@link GridBagLayout} layout.
 	 *
-	 * @return New Panel instance.
+	 * @param text - {@link String} of text.
+	 */
+	private Panel() {
+		setBackground(Color.decode("#343434"));
+		setLayout(new GridBagLayout());
+	}
+
+	/**
+	 * Create a new {@link Panel} object.
+	 *
+	 * @return New {@link Panel} instance.
 	 */
 	static Panel create() {
 		return new Panel();
-	}
-	
-	private Panel() {
-		setLayout(new GridBagLayout());
-		setBackground(Color.decode("#343434"));
 	}
 
 }
