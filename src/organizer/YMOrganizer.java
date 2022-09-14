@@ -21,7 +21,7 @@ public final class YMOrganizer {
 	 */
 	public static void run() {
 		YMOrganizer organizer = new YMOrganizer();
-		ChooserGUI.chooseAndOrganizeWith(organizer);
+		ChooserGUI.organizeWith(organizer);
 	}
 
 	/**

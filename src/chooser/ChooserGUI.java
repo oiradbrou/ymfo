@@ -44,7 +44,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	
-	public static ChooserGUI chooseAndOrganizeWith(YMOrganizer organizer) {
+	public static ChooserGUI organizeWith(YMOrganizer organizer) {
 		return new ChooserGUI(organizer);
 	}
 
