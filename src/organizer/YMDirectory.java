@@ -70,7 +70,7 @@ final class YMDirectory extends Directory {
 	 *
 	 * @param file - File to store inside the directory.
 	 */
-	void storeFile(YMFile file) {
+	void storeFile(YearMonthFile file) {
 		String fileYear = file.extractYear();
 		String fileMonth = file.extractMonth();
 

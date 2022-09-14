@@ -34,13 +34,13 @@ final class SourceDirectory extends Directory {
 	 *
 	 * @return List of files.
 	 */
-	List<YMFile> getFiles() {
+	List<YearMonthFile> getFiles() {
 		return Arrays.asList(dir.listFiles())
 					 .parallelStream()
 					 .map(File::getPath)
 					 .map(path -> {
 						 	try {
-						 		return YMFile.createFromPath(path);
+						 		return YearMonthFile.createFromPath(path);
 						 	} catch (FileNotFoundException e) {
 						 		System.err.println("Ensure that the directory only contains files.");
 						 		return null;}})

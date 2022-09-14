@@ -12,7 +12,7 @@ import java.nio.file.attribute.BasicFileAttributes;
  * The date extracted is the one referring to the last time the file was
  * modified.
  */
-final class YMFile {
+final class YearMonthFile {
 
 	private final File file;
 	private final String date;
@@ -34,8 +34,8 @@ final class YMFile {
 	 * @throws FileNotFoundException if <b>filePath</b> leads to a resource
 	 * that isn't a file.
 	 */
-	static YMFile createFromPath(String filePath) throws FileNotFoundException {
-		return new YMFile(filePath);
+	static YearMonthFile createFromPath(String filePath) throws FileNotFoundException {
+		return new YearMonthFile(filePath);
 	}
 
 	/**
@@ -79,7 +79,7 @@ final class YMFile {
 		file.renameTo(new File(newPath));
 	}
 
-	private YMFile(String path) throws FileNotFoundException {
+	private YearMonthFile(String path) throws FileNotFoundException {
 		file = new File(path);
 
 		if (!file.isFile())

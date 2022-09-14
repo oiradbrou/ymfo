@@ -56,7 +56,7 @@ public final class YMOrganizer {
 	public void organize() {
 		LinkedList<String> alreadyPresentDates = destDir.containedDates();
 
-		for (YMFile image : srcDir.getFiles()) {
+		for (YearMonthFile image : srcDir.getFiles()) {
 			String imageYear = image.extractYear();
 			String imageMonth = image.extractMonth();
 			String imageName = imageYear + "-" + imageMonth;
