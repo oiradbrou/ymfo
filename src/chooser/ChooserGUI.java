@@ -21,13 +21,13 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	/**
 	 * Interface components.
 	 */
-	private Button srcButton, destButton, runButton;
-	private Label srcLabel, destLabel;
+	private Button sourceButton, destinationButton, runButton;
+	private Label sourceLabel, destinationLabel;
 	private Panel panel;
-	private TextField srcTextField, destTextField;
+	private TextField sourceTextField, destinationTextField;
 
 	/**
-	 * Defines how to organize the files in the destination directory, that is in a <b>year/month</b>
+	 * Defines how to organize the files in the destination Directory, that is in a <b>year/month</b>
 	 * structure.
 	 */
 	private final YMOrganizer organizer = new YMOrganizer();
@@ -43,15 +43,9 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Creates a directory chooser GUI that organizes choose directory according to the provided organizer.
-	 * 
-	 * @param organizer
-	 * @return New {@link ChooserGUI} instance.
+	 * When an action occurs, checks if a button is pressed. If it's <b>Run</b>, organizes the destination
+	 * Directory. Alternatively, checks if it's one of the <b>Browse</b> ones. 
 	 */
-	public static ChooserGUI run() {
-		return new ChooserGUI();
-	}
-
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		Object pressedButton = e.getSource();
@@ -59,32 +53,41 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 		if (pressedButton == runButton)
 			organizer.organize();
 		else {
-			JFileChooser dirChooser = new JFileChooser();
-			dirChooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+			JFileChooser chooser = new JFileChooser();
+			chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 
-			if (dirChooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
-				String choosedDirPath = dirChooser.getSelectedFile().getAbsolutePath();
+			if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
+				String chosenPath = chooser.getSelectedFile().getAbsolutePath();
 
-				checkPressedDirButtons(pressedButton, choosedDirPath);
+				checkPressedDirectoryButtons(pressedButton, chosenPath);
 			}
 		}
 	}
+	
+	/**
+	 * Initiates the interface.
+	 * 
+	 * @return New {@link ChooserGUI} instance.
+	 */
+	public static void run() {
+		new ChooserGUI();
+	}
 
-	private void checkPressedDirButtons(Object pressedButton, String choosedDirPath) {
-		if (pressedButton == srcButton) {
+	private void checkPressedDirectoryButtons(Object pressedButton, String choosedDirectoryPath) {
+		if (pressedButton == sourceButton) {
 			try {
-				organizer.setSrcDir(choosedDirPath);
+				organizer.setSource(choosedDirectoryPath);
 			} catch (NotDirectoryException e1) {
 				e1.printStackTrace();
 			}
-			srcTextField.setText(choosedDirPath);
-		} else if (pressedButton == destButton) {
+			sourceTextField.setText(choosedDirectoryPath);
+		} else if (pressedButton == destinationButton) {
 			try {
-				organizer.setDestDir(choosedDirPath);
+				organizer.setDestinatio(choosedDirectoryPath);
 			} catch (NotDirectoryException e1) {
 				e1.printStackTrace();
 			}
-			destTextField.setText(choosedDirPath);
+			destinationTextField.setText(choosedDirectoryPath);
 		}
 	}
 
@@ -120,30 +123,30 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 
 	private void createComponents() {
 		panel = Panel.create();
-		srcLabel = Label.withText("Source folder:");
-		destLabel = Label.withText("Destination folder:");
-		srcTextField = TextField.create();
-	  	destTextField = TextField.create();
-	  	srcButton = Button.withText("Browse");
-		destButton = Button.withText("Browse");
+		sourceLabel = Label.withText("Source folder:");
+		destinationLabel = Label.withText("destinationination folder:");
+		sourceTextField = TextField.create();
+	  	destinationTextField = TextField.create();
+	  	sourceButton = Button.withText("Browse");
+		destinationButton = Button.withText("Browse");
 		runButton = Button.withText("Run");
 	}
 
 	private void addButtonsToActionListener() {
-		srcButton.addActionListener(this);
-		destButton.addActionListener(this);
+		sourceButton.addActionListener(this);
+		destinationButton.addActionListener(this);
 		runButton.addActionListener(this);
 	}
 
 	private void attachComponents() {
 		contrains.insets = new Insets(10, 10, 10, 10);
 
-		addToPanelXYConstrained(0, 0, srcLabel);
-		addToPanelXYConstrained(1, 0, srcTextField);
-		addToPanelXYConstrained(2, 0, srcButton);
-		addToPanelXYConstrained(0, 1, destLabel);
-		addToPanelXYConstrained(1, 1, destTextField);
-		addToPanelXYConstrained(2, 1, destButton);
+		addToPanelXYConstrained(0, 0, sourceLabel);
+		addToPanelXYConstrained(1, 0, sourceTextField);
+		addToPanelXYConstrained(2, 0, sourceButton);
+		addToPanelXYConstrained(0, 1, destinationLabel);
+		addToPanelXYConstrained(1, 1, destinationTextField);
+		addToPanelXYConstrained(2, 1, destinationButton);
 		contrains.fill = GridBagConstraints.HORIZONTAL;
 		addToPanelXYConstrained(1, 3, runButton);
 	}
