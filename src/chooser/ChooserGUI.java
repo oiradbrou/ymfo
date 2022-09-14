@@ -1,4 +1,4 @@
-package dirchooser;
+package chooser;
 
 import java.awt.Component;
 import java.awt.GridBagConstraints;
@@ -16,7 +16,7 @@ import javax.swing.UnsupportedLookAndFeelException;
 
 import organizer.YMOrganizer;
 
-public final class DirChooser extends JFrame implements ActionListener {
+public final class ChooserGUI extends JFrame implements ActionListener {
 
 	/**
 	 * Interface components.
@@ -44,8 +44,8 @@ public final class DirChooser extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
 
 	
-	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
-		return new DirChooser(organizer);
+	public static ChooserGUI chooseAndOrganizeWith(YMOrganizer organizer) {
+		return new ChooserGUI(organizer);
 	}
 
 	@Override
@@ -84,7 +84,7 @@ public final class DirChooser extends JFrame implements ActionListener {
 		}
 	}
 
-	private DirChooser(YMOrganizer organizer) {
+	private ChooserGUI(YMOrganizer organizer) {
 		this.organizer = organizer;		
 		
 		initFrame();

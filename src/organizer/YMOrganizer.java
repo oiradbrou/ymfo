@@ -3,7 +3,7 @@ package organizer;
 import java.nio.file.NotDirectoryException;
 import java.util.LinkedList;
 
-import dirchooser.DirChooser;
+import chooser.ChooserGUI;
 
 /**
  * Class that organizes the files from the source {@link SrcDirectory} in the
@@ -21,7 +21,7 @@ public final class YMOrganizer {
 	 */
 	public static void run() {
 		YMOrganizer organizer = new YMOrganizer();
-		DirChooser.chooseAndOrganizeWith(organizer);
+		ChooserGUI.chooseAndOrganizeWith(organizer);
 	}
 
 	/**

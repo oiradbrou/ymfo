@@ -1,4 +1,4 @@
-package dirchooser;
+package chooser;
 
 import java.awt.Color;
 

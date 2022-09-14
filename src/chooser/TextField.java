@@ -1,4 +1,4 @@
-package dirchooser;
+package chooser;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
