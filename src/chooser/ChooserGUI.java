@@ -12,7 +12,6 @@ import java.nio.file.NotDirectoryException;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 
 import organizer.YMOrganizer;
 
@@ -31,7 +30,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 * structure.
 	 */
 	private final YMOrganizer organizer = new YMOrganizer();
-	
+
 	/**
 	 * Imposes a {@link GridBagConstraints} constraint to the components.
 	 */
@@ -44,11 +43,11 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 
 	/**
 	 * When an action occurs, checks if a button is pressed. If it's <b>Run</b>, organizes the destination
-	 * Directory. Alternatively, checks if it's one of the <b>Browse</b> ones. 
+	 * Directory. Alternatively, checks if it's one of the <b>Browse</b> ones.
 	 */
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		Object pressedButton = e.getSource();
+	public void actionPerformed(ActionEvent event) {
+		Object pressedButton = event.getSource();
 
 		if (pressedButton == runButton)
 			organizer.organize();
@@ -59,68 +58,93 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 			if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 				String chosenPath = chooser.getSelectedFile().getAbsolutePath();
 
-				checkPressedDirectoryButtons(pressedButton, chosenPath);
+				checkBrowsePressed(pressedButton, chosenPath);
 			}
 		}
 	}
-	
+
 	/**
 	 * Initiates the interface.
-	 * 
+	 *
 	 * @return New {@link ChooserGUI} instance.
 	 */
 	public static void run() {
 		new ChooserGUI();
 	}
 
-	private void checkPressedDirectoryButtons(Object pressedButton, String choosedDirectoryPath) {
+	/**
+	 * Checks whether a <b>Browse</b> buttons was pressed. If so, it sets the organizer's associated
+	 * directory to the one located at the chosen path.
+	 *
+	 * @param pressedButton - button that has been pressed.
+	 * @param path - path of the chosen directory.
+	 */
+	private void checkBrowsePressed(Object pressedButton, String path) {
 		if (pressedButton == sourceButton) {
 			try {
-				organizer.setSource(choosedDirectoryPath);
-			} catch (NotDirectoryException e1) {
-				e1.printStackTrace();
+				organizer.setSource(path);
+			} catch (NotDirectoryException exception) {
+				System.out.println(exception.getMessage());
 			}
-			sourceTextField.setText(choosedDirectoryPath);
+
+			sourceTextField.setText(path);
 		} else if (pressedButton == destinationButton) {
 			try {
-				organizer.setDestination(choosedDirectoryPath);
-			} catch (NotDirectoryException e1) {
-				e1.printStackTrace();
+				organizer.setDestination(path);
+			} catch (NotDirectoryException exception) {
+				System.out.println(exception.getMessage());
 			}
-			destinationTextField.setText(choosedDirectoryPath);
+
+			destinationTextField.setText(path);
 		}
 	}
 
-	private ChooserGUI() {		
-		initFrame();
-		
-		try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException | InstantiationException | IllegalAccessException
-				| UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+	/**
+	 * Adds <b>Browse</b> and <b>Run</b> to {@link ActionListener}, so that they can trigger a reaction when
+	 * pressed.
+	 */
+	private void addButtons() {
+		sourceButton.addActionListener(this);
+		destinationButton.addActionListener(this);
+		runButton.addActionListener(this);
 	}
-
-	private void initFrame() {
-		createComponents();
-		addButtonsToActionListener();
-		
+	
+	/**
+	 * Adds a component to the panel in position (x,y).
+	 * 
+	 * @param component - component to add.
+	 * @param x - horizontal position.
+	 * @param y - vertical position.
+	 */
+	private void addConstrained(Component component, int x, int y) {
+		contrains.gridx = x;
+		contrains.gridy = y;
+		panel.add(component, contrains);
+	}
+	
+	/**
+	 * Adds all the buttons and components to the interface.
+	 */
+	private void addComponents() {
 		add(panel);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setTitle("Image Renamer");
-
-		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
-		setIconImage(icon);
+		addButtons();
 		
-		attachComponents();
-
-		this.pack();
-		this.setVisible(true);
+		contrains.insets = new Insets(10, 10, 10, 10);
+		
+		addConstrained(sourceLabel, 0, 0);
+		addConstrained(sourceTextField, 1, 0);
+		addConstrained(sourceButton, 2, 0);
+		addConstrained(destinationLabel, 0, 1);
+		addConstrained(destinationTextField, 1, 1);
+		addConstrained(destinationButton, 2, 1);
+		
+		contrains.fill = GridBagConstraints.HORIZONTAL;
+		addConstrained(runButton,1, 3);
 	}
-
+	
+	/**
+	 * Creates all the components needed for the interface.
+	 */
 	private void createComponents() {
 		panel = Panel.create();
 		sourceLabel = Label.withText("Source folder:");
@@ -132,29 +156,36 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 		runButton = Button.withText("Run");
 	}
 
-	private void addButtonsToActionListener() {
-		sourceButton.addActionListener(this);
-		destinationButton.addActionListener(this);
-		runButton.addActionListener(this);
+	/**
+	 * Starts the GUI and sets its style to the system one.
+	 */
+	private ChooserGUI() {
+		initGUI();
+
+		try {
+			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+		} catch (Exception exception) {
+			System.out.println(exception.getMessage());
+		}
 	}
 
-	private void attachComponents() {
-		contrains.insets = new Insets(10, 10, 10, 10);
+	/**
+	 * Creates the interface by setting its title, icon and makes it closable. Next, the components are
+	 * created and added. Finally, the GUI is set visible.
+	 */
+	private void initGUI() {		
+		setTitle("Image Renamer");
 
-		addToPanelXYConstrained(0, 0, sourceLabel);
-		addToPanelXYConstrained(1, 0, sourceTextField);
-		addToPanelXYConstrained(2, 0, sourceButton);
-		addToPanelXYConstrained(0, 1, destinationLabel);
-		addToPanelXYConstrained(1, 1, destinationTextField);
-		addToPanelXYConstrained(2, 1, destinationButton);
-		contrains.fill = GridBagConstraints.HORIZONTAL;
-		addToPanelXYConstrained(1, 3, runButton);
-	}
+		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
+		setIconImage(icon);
+		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-	private void addToPanelXYConstrained(int gridX, int gridY, Component component) {
-		contrains.gridx = gridX;
-		contrains.gridy = gridY;
-		panel.add(component, contrains);
+		createComponents();
+		addComponents();
+
+		this.pack();
+		this.setVisible(true);
 	}
 
 }
