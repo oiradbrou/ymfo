@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
  * Once initialized, the class creates a {@link YMFile} for each of the files
  * it contains.
  */
-final class SrcDirectory extends Directory {
+final class SourceDirectory extends Directory {
 
 	/**
 	 * Static factory method that creates and returns a {@link SrcDirectory}
@@ -24,8 +24,8 @@ final class SrcDirectory extends Directory {
 	 * @throws NotDirectoryException If <b>dirPath</b> leads to a resource
 	 * that isn't a directory.
 	 */
-	static SrcDirectory createFromDir(String dirPath) throws NotDirectoryException {
-		return new SrcDirectory(dirPath);
+	static SourceDirectory createFromDir(String dirPath) throws NotDirectoryException {
+		return new SourceDirectory(dirPath);
 	}
 
 	/**
@@ -47,7 +47,7 @@ final class SrcDirectory extends Directory {
 					 .collect(Collectors.toList());
 	}
 
-	private SrcDirectory(String path) throws NotDirectoryException {
+	private SourceDirectory(String path) throws NotDirectoryException {
 		super(path);
 	}
 
