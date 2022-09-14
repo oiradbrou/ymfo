@@ -3,8 +3,6 @@ package organizer;
 import java.nio.file.NotDirectoryException;
 import java.util.LinkedList;
 
-import chooser.ChooserGUI;
-
 /**
  * Class that organizes the files from the source {@link SrcDirectory} in the
  * destination {@link YMDirectory}. The files are organized in the year/month
@@ -14,15 +12,6 @@ public final class YMOrganizer {
 
 	private SourceDirectory srcDir;
 	private YMDirectory destDir;
-
-	/**
-	 * Method that runs the {@link YMOrganizer} by creating an instance of it and
-	 * starting the directory selection module.
-	 */
-	public static void run() {
-		YMOrganizer organizer = new YMOrganizer();
-		ChooserGUI.organizeWith(organizer);
-	}
 
 	/**
 	 * Setter of the {@link SrcDirectory} from which the files to organize are

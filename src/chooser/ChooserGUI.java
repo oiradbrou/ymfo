@@ -30,8 +30,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 * Defines how to organize the files in the destination directory, that is in a <b>year/month</b>
 	 * structure.
 	 */
-	private final YMOrganizer organizer;
-	
+	private final YMOrganizer organizer = new YMOrganizer();
 	
 	/**
 	 * Imposes a {@link GridBagConstraints} constraint to the components.
@@ -43,9 +42,14 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 */
 	private static final long serialVersionUID = 1L;
 
-	
-	public static ChooserGUI organizeWith(YMOrganizer organizer) {
-		return new ChooserGUI(organizer);
+	/**
+	 * Creates a directory chooser GUI that organizes choose directory according to the provided organizer.
+	 * 
+	 * @param organizer
+	 * @return New {@link ChooserGUI} instance.
+	 */
+	public static ChooserGUI run() {
+		return new ChooserGUI();
 	}
 
 	@Override
@@ -84,9 +88,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 		}
 	}
 
-	private ChooserGUI(YMOrganizer organizer) {
-		this.organizer = organizer;		
-		
+	private ChooserGUI() {		
 		initFrame();
 		
 		try {
