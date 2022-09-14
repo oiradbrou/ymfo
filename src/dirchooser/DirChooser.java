@@ -18,17 +18,32 @@ import organizer.YMOrganizer;
 
 public final class DirChooser extends JFrame implements ActionListener {
 
+	/**
+	 * Interface components.
+	 */
+	private Button srcButton, destButton, runButton;
+	private Label srcLabel, destLabel;
+	private Panel panel;
+	private TextField srcTextField, destTextField;
+
+	/**
+	 * Defines how to organize the files in the destination directory, that is in a <b>year/month</b>
+	 * structure.
+	 */
+	private final YMOrganizer organizer;
+	
+	
+	/**
+	 * Imposes a {@link GridBagConstraints} constraint to the components.
+	 */
+	private static GridBagConstraints contrains = new GridBagConstraints();
+
+	/**
+	 * Default serial version ID to avoid warnings.
+	 */
 	private static final long serialVersionUID = 1L;
 
-	private Panel panel;
-	private Label srcLabel, destLabel;
-	private TextField srcTextField, destTextField;
-	private Button srcButton, destButton, runButton;
 	
-	GridBagConstraints  contrains = new GridBagConstraints();
-
-	private final YMOrganizer organizer;
-
 	public static DirChooser chooseAndOrganizeWith(YMOrganizer organizer) {
 		return new DirChooser(organizer);
 	}
