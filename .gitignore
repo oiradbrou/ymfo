@@ -1,4 +1,9 @@
+# Compiled classes
 *.class
+
+# Machine dependent dependencies
 *.classpath
+
+# Eclipse project data and properties
 *.project
 *.settings
