@@ -21,7 +21,7 @@ public final class YMOrganizer {
 	 * @throws NotDirectoryException - If the path provided leads to a resource
 	 * that isn't a directory.
 	 */
-	public void setSrcDir(String srcDirPath) throws NotDirectoryException {
+	public void setSource(String srcDirPath) throws NotDirectoryException {
 		srcDir = SourceDirectory.createFromDir(srcDirPath);
 	}
 
@@ -33,7 +33,7 @@ public final class YMOrganizer {
 	 * @throws NotDirectoryException - If the path provided leads to a resource
 	 * that isn't a directory.
 	 */
-	public void setDestDir(String destDirPath) throws NotDirectoryException {
+	public void setDestination(String destDirPath) throws NotDirectoryException {
 		destDir = YMDirectory.createFromDir(destDirPath);
 	}
 

@@ -83,7 +83,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 			sourceTextField.setText(choosedDirectoryPath);
 		} else if (pressedButton == destinationButton) {
 			try {
-				organizer.setDestinatio(choosedDirectoryPath);
+				organizer.setDestination(choosedDirectoryPath);
 			} catch (NotDirectoryException e1) {
 				e1.printStackTrace();
 			}
