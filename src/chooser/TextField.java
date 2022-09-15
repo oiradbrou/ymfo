@@ -15,21 +15,21 @@ final class TextField extends JTextField {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Returns a new {@link TextField} object with twenty columns, not editable and not focusable.
-	 */
-	private TextField() {
-		setColumns(Integer.parseInt("20"));
-		setEditable(false);
-		setFocusable(false);
-	}
-
-	/**
 	 * Create a new {@link TextField} object.
 	 *
 	 * @return New TextField instance.
 	 */
 	static TextField create() {
 		return new TextField();
+	}
+	
+	/**
+	 * Returns a new {@link TextField} object with twenty columns, not editable and not focusable.
+	 */
+	private TextField() {
+		setColumns(Integer.parseInt("20"));
+		setEditable(false);
+		setFocusable(false);
 	}
 
 }

@@ -14,6 +14,17 @@ final class Button extends JButton {
 	 * Default serial version ID to avoid warnings.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Create a new {@link Button} object displaying the text provided.
+	 *
+	 * @param text - {@link String} of text.
+	 *
+	 * @return New {@link Button} instance.
+	 */
+	static Button withText(String text) {
+		return new Button(text);
+	}
 
 	/**
 	 * Returns a new {@link Button} object with light grey background and white text. Also, the button is
@@ -26,17 +37,6 @@ final class Button extends JButton {
 		setBackground(Color.decode("#808080"));
 		setFocusable(false);
 		setForeground(Color.decode("#FFFFFF"));
-	}
-
-	/**
-	 * Create a new {@link Button} object displaying the text provided.
-	 *
-	 * @param text - {@link String} of text.
-	 *
-	 * @return New {@link Button} instance.
-	 */
-	static Button withText(String text) {
-		return new Button(text);
 	}
 
 }

@@ -24,13 +24,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	private Label sourceLabel, destinationLabel;
 	private Panel panel;
 	private TextField sourceTextField, destinationTextField;
-
-	/**
-	 * Defines how to organize the files in the destination Directory, that is in a <b>year/month</b>
-	 * structure.
-	 */
-	private final YMOrganizer organizer = new YMOrganizer();
-
+	
 	/**
 	 * Imposes a {@link GridBagConstraints} constraint to the components.
 	 */
@@ -40,6 +34,12 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 * Default serial version ID to avoid warnings.
 	 */
 	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Defines how to organize the files in the destination Directory, that is in a <b>year/month</b>
+	 * structure.
+	 */
+	private final YMOrganizer organizer = new YMOrganizer();
 
 	/**
 	 * When an action occurs, checks if a button is pressed. If it's <b>Run</b>, organizes the destination

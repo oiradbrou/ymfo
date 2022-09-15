@@ -15,6 +15,15 @@ final class Panel extends JPanel {
 	 * Default serial version ID to avoid warnings.
 	 */
 	private static final long serialVersionUID = 1L;
+	
+	/**
+	 * Create a new {@link Panel} object.
+	 *
+	 * @return New {@link Panel} instance.
+	 */
+	static Panel create() {
+		return new Panel();
+	}
 
 	/**
 	 * Returns a new {@link Panel} object with dark grey background and {@link GridBagLayout} layout.
@@ -24,15 +33,6 @@ final class Panel extends JPanel {
 	private Panel() {
 		setBackground(Color.decode("#343434"));
 		setLayout(new GridBagLayout());
-	}
-
-	/**
-	 * Create a new {@link Panel} object.
-	 *
-	 * @return New {@link Panel} instance.
-	 */
-	static Panel create() {
-		return new Panel();
 	}
 
 }
