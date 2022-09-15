@@ -4,25 +4,21 @@ import java.io.File;
 import java.nio.file.NotDirectoryException;
 
 /**
- * Abstract class that serves the purpose of extracting the common parts of
- * {@link SrcDirectory} and {@link YMDirectory}.<br>
- * It generalizes the concept of directory in the project.
+ * Abstracts the common parts of {@link SourceDirectory} and {@link YearMonthDirectory}.
  */
 abstract class Directory {
 
 	/**
-	 * Field that represents the directory to which the class refers.
+	 * Stores the directory that the object refers.
 	 */
 	final File dir;
 
 	/**
-	 * Constructor that initializes the field {@link #dir}.
+	 * Initializes {@link #dir} field.
 	 *
-	 * @param dirPath - Path to a directory.
-	 * @throws NotDirectoryException If the path provided leads to a resource
-	 * that isn't a directory.
+	 * @param path - {@link String} path to a directory.
 	 */
-	Directory(String dirPath) {
+	Directory(String path) {
 		File resource = new File(dirPath);
 
 		if (!resource.isDirectory())
