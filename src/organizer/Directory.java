@@ -1,7 +1,6 @@
 package organizer;
 
 import java.io.File;
-import java.nio.file.NotDirectoryException;
 
 /**
  * Abstracts the common parts of {@link SourceDirectory} and {@link YearMonthDirectory}.
@@ -19,7 +18,7 @@ abstract class Directory {
 	 * @param path - {@link String} path to a directory.
 	 */
 	Directory(String path) {
-		File resource = new File(dirPath);
+		File resource = new File(path);
 
 		if (!resource.isDirectory())
 			System.out.println("Resource chosen is not a directory");
