@@ -7,7 +7,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
-import java.nio.file.NotDirectoryException;
 
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
@@ -57,7 +56,6 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 
 			if (chooser.showSaveDialog(null) == JFileChooser.APPROVE_OPTION) {
 				String chosenPath = chooser.getSelectedFile().getAbsolutePath();
-
 				checkBrowsePressed(pressedButton, chosenPath);
 			}
 		}
@@ -81,20 +79,10 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 */
 	private void checkBrowsePressed(Object pressedButton, String path) {
 		if (pressedButton == sourceButton) {
-			try {
-				organizer.setSource(path);
-			} catch (NotDirectoryException exception) {
-				System.out.println(exception.getMessage());
-			}
-
+			organizer.setSource(path);
 			sourceTextField.setText(path);
-		} else if (pressedButton == destinationButton) {
-			try {
-				organizer.setDestination(path);
-			} catch (NotDirectoryException exception) {
-				System.out.println(exception.getMessage());
-			}
-
+		} else {
+			organizer.setDestination(path);
 			destinationTextField.setText(path);
 		}
 	}
