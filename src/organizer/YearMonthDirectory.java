@@ -91,15 +91,13 @@ final class YearMonthDirectory extends Directory {
 	 * @param file - {@link YearMonthFile} to be store.
 	 */
 	void store(YearMonthFile file) {
-		String fileYear = file.year();
-		String fileMonth = file.month();
+		String year = file.year();
+		String month = file.month();
+		
+		String destinationPath = yearMonthPath(year, month) + "\\";
+		String name = year + "-" + month + "_" + lastImageNumber(year, month) + file.dotExtension();
 
-		file.changePathTo(
-				yearMonthPath(fileYear, fileMonth) + "\\" +
-				fileYear + "-" + fileMonth + "_" +
-				lastImageNumber(fileYear, fileMonth) +
-				file.dotExtension()
-		);
+		file.moveTo(destinationPath + name);
 	}
 
 	private YearMonthDirectory(String path) {
