@@ -12,7 +12,14 @@ import java.nio.file.attribute.BasicFileAttributes;
  */
 final class YearMonthFile {
 
+	/**
+	 * File that the object wraps.
+	 */
 	private final File file;
+	
+	/**
+	 * Date of the wrapped file.
+	 */
 	private final String date;
 
 	/**
