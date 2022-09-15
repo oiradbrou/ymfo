@@ -42,7 +42,7 @@ final class YearMonthFile {
 	 *
 	 * @return Year as {@link String} formatted like "yyyy".
 	 */
-	String extractYear() {
+	String year() {
 		return date.substring(0, 4);
 	}
 
@@ -51,7 +51,7 @@ final class YearMonthFile {
 	 *
 	 * @return Month as {@link String} formatted like "mm".
 	 */
-	String extractMonth() {
+	String month() {
 		return date.substring(5, 7);
 	}
 
@@ -60,7 +60,7 @@ final class YearMonthFile {
 	 *
 	 * @return {@link String} in the form ".extension".
 	 */
-	String extractDotExtension() {
+	String dotExtension() {
 		String name = file.getName();
 		return name.substring(name.indexOf("."));
 	}
@@ -80,10 +80,10 @@ final class YearMonthFile {
 		if (!file.isFile())
 			throw new FileNotFoundException("Error trying to use the file at " + path);
 
-		date = extractDate();
+		date = date();
 	}
 
-	private String extractDate() {
+	private String date() {
 		String date = null;
 		try {
 			date = Files.readAttributes(file.toPath(), BasicFileAttributes.class)

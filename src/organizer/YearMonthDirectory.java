@@ -1,7 +1,9 @@
 package organizer;
 
 import java.io.File;
+
 import java.nio.file.NotDirectoryException;
+
 import java.util.Arrays;
 import java.util.LinkedList;
 
@@ -89,14 +91,14 @@ final class YearMonthDirectory extends Directory {
 	 * @param file - {@link YearMonthFile} to be store.
 	 */
 	void store(YearMonthFile file) {
-		String fileYear = file.extractYear();
-		String fileMonth = file.extractMonth();
+		String fileYear = file.year();
+		String fileMonth = file.month();
 
 		file.changePathTo(
 				yearMonthPath(fileYear, fileMonth) + "\\" +
 				fileYear + "-" + fileMonth + "_" +
 				lastImageNumber(fileYear, fileMonth) +
-				file.extractDotExtension()
+				file.dotExtension()
 		);
 	}
 
