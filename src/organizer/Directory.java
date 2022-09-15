@@ -22,11 +22,11 @@ abstract class Directory {
 	 * @throws NotDirectoryException If the path provided leads to a resource
 	 * that isn't a directory.
 	 */
-	Directory(String dirPath) throws NotDirectoryException {
+	Directory(String dirPath) {
 		File resource = new File(dirPath);
 
 		if (!resource.isDirectory())
-			throw new NotDirectoryException(dirPath);
+			System.out.println("Resource chosen is not a directory");
 
 		dir = resource;
 	}

@@ -2,7 +2,6 @@ package organizer;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.nio.file.NotDirectoryException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,11 +17,10 @@ final class SourceDirectory extends Directory {
 	 * Static factory method that creates and returns a {@link SrcDirectory} from a given path.
 	 *
 	 * @param dirPath - Path to a directory.
+	 * 
 	 * @return New SrcDirectory object.
-	 * @throws NotDirectoryException If <b>dirPath</b> leads to a resource
-	 * that isn't a directory.
 	 */
-	static SourceDirectory createFromDir(String dirPath) throws NotDirectoryException {
+	static SourceDirectory createFromDir(String dirPath) {
 		return new SourceDirectory(dirPath);
 	}
 
@@ -45,7 +43,7 @@ final class SourceDirectory extends Directory {
 					 .collect(Collectors.toList());
 	}
 
-	private SourceDirectory(String path) throws NotDirectoryException {
+	private SourceDirectory(String path) {
 		super(path);
 	}
 

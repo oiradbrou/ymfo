@@ -28,7 +28,7 @@ final class YearMonthDirectory extends Directory {
 	 * 
 	 * @throws NotDirectoryException if the path leads to a resource that isn't a directory.
 	 */
-	static YearMonthDirectory from(String path) throws NotDirectoryException {
+	static YearMonthDirectory from(String path) {
 		return new YearMonthDirectory(path);
 	}
 	
@@ -100,7 +100,7 @@ final class YearMonthDirectory extends Directory {
 		);
 	}
 
-	private YearMonthDirectory(String path) throws NotDirectoryException {
+	private YearMonthDirectory(String path) {
 		super(path);
 	}
 
