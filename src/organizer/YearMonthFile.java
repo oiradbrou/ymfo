@@ -8,7 +8,7 @@ import java.nio.file.Files;
 import java.nio.file.attribute.BasicFileAttributes;
 
 /**
- * Class that wraps a file, providing methods to extract it's date and change it's path.<br>
+ * Wraps a file, providing methods to extract its date and change it's path.<br>
  * The date extracted is the one referring to the last time the file was modified.
  */
 final class YearMonthFile {
@@ -44,15 +44,6 @@ final class YearMonthFile {
 	}
 
 	/**
-	 * Returns the path of the {@link YearMonthFile} it's called on.
-	 *
-	 * @return {@link String} representing the path of the file.
-	 */
-	String path() {
-		return file.getPath();
-	}
-
-	/**
 	 * Returns the month's number of the {@link YearMonthFile} date it's called on.
 	 *
 	 * @return Month as {@link String} as <b>"mm"</b>.
@@ -68,6 +59,15 @@ final class YearMonthFile {
 	 */
 	void moveTo(String path) {
 		file.renameTo(new File(path));
+	}
+	
+	/**
+	 * Returns the path of the {@link YearMonthFile} it's called on.
+	 *
+	 * @return {@link String} representing the path of the file.
+	 */
+	String path() {
+		return file.getPath();
 	}
 
 	/**

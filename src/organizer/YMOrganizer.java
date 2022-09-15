@@ -1,59 +1,53 @@
 package organizer;
 
-import java.nio.file.NotDirectoryException;
 import java.util.LinkedList;
 
 /**
- * Class that organizes the files from the source {@link SrcDirectory} in the
- * destination {@link YMDirectory}. The files are organized in the year/month
- * structure of the destination folder.
+ * Moves the files from a source directory into a destination one.<br>
+ * Files are organized in the <b>year\month</b> structure of the destination folder.
  */
 public final class YMOrganizer {
 
-	private SourceDirectory srcDir;
-	private YMDirectory destDir;
+	/**
+	 * Source and destination directories.
+	 */
+	private SourceDirectory sourceDirectory;
+	private YearMonthDirectory destinationDirectory;
 
 	/**
-	 * Setter of the {@link SrcDirectory} from which the files to organize are
-	 * taken.
+	 * Sets the source directory from which the files to organize are taken.
 	 *
-	 * @param srcDirPath - Path to a directory.
-	 * @throws NotDirectoryException - If the path provided leads to a resource
-	 * that isn't a directory.
+	 * @param path - {@link String} path to a directory.
 	 */
-	public void setSource(String srcDirPath) throws NotDirectoryException {
-		srcDir = SourceDirectory.createFromDir(srcDirPath);
+	public void setSource(String path) {
+		sourceDirectory = SourceDirectory.from(path);
 	}
 
 	/**
-	 * Setter of the destination {@link YMDirectory} where the organized files
-	 * are stored.
+	 * Sets the destination directory where the organized files are stored.
 	 *
-	 * @param destDirPath - Path to a directory.
-	 * @throws NotDirectoryException - If the path provided leads to a resource
-	 * that isn't a directory.
+	 * @param path - {@link String} path to a directory.
 	 */
-	public void setDestination(String destDirPath) throws NotDirectoryException {
-		destDir = YMDirectory.createFromDir(destDirPath);
+	public void setDestination(String path) {
+		destinationDirectory = YearMonthDirectory.from(path);
 	}
 
 	/**
-	 * Method that organizes the files contained in the {@link SrcDirectory}
-	 * by storing them into the {@link YMDirectory}. This means that the files
-	 * are organized according to the structure of the destination directory.
+	 * Organizes the files contained in the source directory by storing them into the destination one.<br>
+	 * Files are organized according to the structure of the destination directory.
 	 */
 	public void organize() {
-		LinkedList<String> alreadyPresentDates = destDir.containedDates();
+		LinkedList<String> dates = destinationDirectory.dates();
 
-		for (YearMonthFile image : srcDir.getFiles()) {
-			String imageYear = image.extractYear();
-			String imageMonth = image.extractMonth();
-			String imageName = imageYear + "-" + imageMonth;
+		for (YearMonthFile file : sourceDirectory.files()) {
+			String year = file.year();
+			String month = file.month();
+
+			String name = year + "-" + month;
+			if (!dates.contains(name))
+				destinationDirectory.makeDirectory(year, month);
 			
-			if (!alreadyPresentDates.contains(imageName))
-				destDir.createDirectory(imageYear, imageMonth);
-			
-			destDir.storeFile(image);
+			destinationDirectory.store(file);
 		}
 	}
 
