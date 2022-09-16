@@ -6,8 +6,8 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.image.BufferedImage;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.UIManager;
@@ -163,11 +163,11 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 */
 	private void initGUI() {		
 		setTitle("Image Renamer");
-
-		Image icon = new BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB_PRE);
-		setIconImage(icon);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		Image image = new ImageIcon("icon.png").getImage();
+		setIconImage(image);
 
 		createComponents();
 		addComponents();
