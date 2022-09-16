@@ -7,3 +7,4 @@
 # Eclipse project data and properties
 *.project
 *.settings
+/bin/
