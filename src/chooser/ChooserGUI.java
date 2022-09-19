@@ -162,7 +162,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	 * created and added. Finally, the GUI is set visible.
 	 */
 	private void initGUI() {		
-		setTitle("Year/Month File Organizer");
+		setTitle("Year\\Month File Organizer");
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
