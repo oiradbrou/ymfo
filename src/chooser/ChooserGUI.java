@@ -166,7 +166,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		Image image = new ImageIcon("icon.png").getImage();
+		Image image = new ImageIcon("src\\icon.png").getImage();
 		setIconImage(image);
 
 		createComponents();
