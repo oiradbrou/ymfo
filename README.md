@@ -31,7 +31,10 @@ Files inside the month-representing directories are numbered from $0$ to $n$.
 ## Use
 The idea behind the project was to chronologically organize photos coming from an android phone, but it was better to generalize its scope, so the same procudure can be applied to files of any kind without changing the code.
 
-To use this program (assuming you already satify the [requirements](#requirements))follow the steps below.
+## Tutorial
+
+To use this program (assuming you already satify the [requirements](#requirements)) follow the steps below.
+
 1. run *YMFO.jar*, that should open this window
 
     ![](tutorial/tutorial1.jpg)
