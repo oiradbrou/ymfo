@@ -1,5 +1,5 @@
 # Year\Month File Organizer
-**YMFO** allows the user to transfer files from a directory to another one. However, the files in the destination directory are stored in [two levels of directories](#directory-structure) according to their *last modified time date*.
+**YMFO** allows the user to transfer files from a directory to another one. Moreover, the files in the destination directory are stored in [two levels of directories](#directory-structure) according to their *last modified time date*.
 
 ## Directory Structure
 The directories are structured into two different levels:
