@@ -136,7 +136,7 @@ public final class ChooserGUI extends JFrame implements ActionListener {
 	private void createComponents() {
 		panel = Panel.create();
 		sourceLabel = Label.withText("Source folder:");
-		destinationLabel = Label.withText("destinationination folder:");
+		destinationLabel = Label.withText("Destination folder:");
 		sourceTextField = TextField.create();
 	  	destinationTextField = TextField.create();
 	  	sourceButton = Button.withText("Browse");
